@@ -1,0 +1,56 @@
+\documentclass[]{article}
+
+%%%%%%%%%%%% PREÁMBULO %%%%%%%%%%%%%%%%%%%%%
+
+% Paquetes
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+% Comandos
+
+
+% Opciones
+
+\title{Tarea 1}
+\author{nom}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item ¿Cuáles son las principales diferencias entre un sistema distribuido, un sistema
+concurrente y un sistema paralelo? Argumenta detalladamente.
+    \item Retomando el problema de los dos enamorados con los mismos requerimientos
+vistos en clase, responda las siguientes preguntas:
+
+\begin{itemize}
+	\item Suponga que las citas sólo se pueden realizar entre las 21:00 y las 22:00 horas. ¿Tiene solución el problema en este caso?
+	\item ¿El problema tiene solución cuando añade el siguiente requerimiento: los amantes deben ser capaces de coordinar una hora para una cita solamente cuando ningún mensaje se pierde, y, en cualquier otro caso, ellos no deberían presentarse?
+
+	\item Consideremos una variación: Los dos amantes se han dado cuenta de que no necesitan ponerse de acuerdo sobre una hora exacta para la reunión, está bien si sus horas de reunión son lo suficientemente cercanas. En otras palabras, cada uno debería eventualmente elegir un tiempo, de modo que los dos tiempos estén lo suficientemente cerca. ¿Se puede resolver su problema?
+
+\end{itemize}
+
+    \item Investigue y explica brevemente el protocolo TCP. ¿Es posible resolver el problema
+de los dos amantes si hay un canal TCP confiable entre ambos amantes?
+
+
+    \item Considera un sistema distribuido con $n \geq 2$ procesos, $p1, p2, . . . , pn$, en el que la gráfica de comunicación es la completa $K_n$. El sistema es síncrono pero la comunicación no es confiable; sea P el conjunto de todos los procesos que envían mensajes en el tiempo$d$; entonces, hay dos posibilidades, todos los mensajes de P llegan a su destino en el tiempo $d + 1$, o uno de ellos se pierde y nunca llega a sus destino y los otros en P si llegan en el tiempo $d + 1$.
+
+Considera un algoritmo A en el que cada proceso $p_i$ tiene como entrada un identificador
+$ID_i$, que es un número natural (diferente al de los demás), y cada proceso $p_i$ simplemente envía su $ID_i$ a los otros $n - 1$ procesos. Dibuja cuales son todos los estados \textit{globales} posibles (mundos posibles) en el tiempo 1 (los procesos mandan sus mensajes en el tiempo 0). En cada estado global, especifica el estado \textit{local} de cada proceso, es decir, la información que cada proceso tiene en ese estado global; y entre cada par de estados globales pinta una arista con los procesos que no pueden \textit{distinguir} entre esos estados. ¿Es posible que cada proceso elija
+consistentemente uno de los $ID$s de entre los que recibió de forma tal que en cada estado
+global todos los procesos eligen el mismo $ID$? Argumenta tu respuesta.
+
+    \item Tomate 10 minutos de tu tiempo y ve el siguiente video: \href{https://www.youtube.
+com/watch?v=rkZzg7Vowao}{The Man Who Revolutionized Computer Science With Math. Quanta Magazine}. Presenta un breve reporte de lo que trata dicho video.
+
+
+
+\end{enumerate}
+
+\end{document}
