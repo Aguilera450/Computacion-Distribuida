@@ -1,0 +1,24 @@
+%%%%%%%%%%% Aquí va la solución al problema 1.
+\newpage
+4. Considera un sistema distribuido con $n \geq 2$ procesos,
+$p1, p2, . . . , pn$, en el que la gráfica de comunicación es
+la completa $K_n$. El sistema es síncrono pero la comunicación
+no es confiable; sea P el conjunto de todos los procesos que
+envían mensajes en el tiempo$d$; entonces, hay dos posibilidades,
+todos los mensajes de P llegan a su destino en el tiempo $d + 1$,
+o uno de ellos se pierde y nunca llega a sus destino y los otros
+en P si llegan en el tiempo $d + 1$.
+\newline
+
+Considera un algoritmo A en el que cada proceso $p_i$ tiene como
+entrada un identificador $ID_i$, que es un número natural (diferente
+al de los demás), y cada proceso $p_i$ simplemente envía su $ID_i$
+a los otros $n - 1$ procesos. Dibuja cuales son todos los estados
+\textit{globales} posibles (mundos posibles) en el tiempo 1 (los procesos
+mandan sus mensajes en el tiempo 0). En cada estado global, especifica
+el estado \textit{local} de cada proceso, es decir, la información que
+cada proceso tiene en ese estado global; y entre cada par de estados
+globales pinta una arista con los procesos que no pueden \textit{distinguir}
+entre esos estados. ¿Es posible que cada proceso elija consistentemente
+uno de los $ID$s de entre los que recibió de forma tal que en cada estado
+global todos los procesos eligen el mismo $ID$? Argumenta tu respuesta.
