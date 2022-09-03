@@ -1,7 +1,8 @@
+*.gz
 *.md~
+*.tex~
 *.aux
 *.log
 *.bcf
-*.tex~
 *.run.xml
 *.gitignore~

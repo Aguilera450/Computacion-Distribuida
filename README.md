@@ -2,7 +2,7 @@
 En este repositorio se subiran todas las actualizaciones de tareas y prácticas realizadas en el curso de Computación Distribuida con grupo 7070 y a cargo del M.C. [Miguel Ángel Piña Avelino](https://miguelpinia.github.io/home) que se imparte en la Facultad de Ciencias de la UNAM.
 
 ## Integrantes:
-- Natalia Pérez COMPLETAR    - @NataliaPerez08
+- Natalia Abigail Pérez Romero    - @NataliaPerez08
 - Adrian Aguilera Moreno     - @Aguilera450
 - Kevin Jair Torres Valencia - @KevinTorres74
 
