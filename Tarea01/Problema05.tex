@@ -5,6 +5,22 @@
   Who Revolutionized Computer Science With Math. Quanta Magazine}.
 Presenta un breve reporte de lo que trata dicho video.
 
-Leslie Lamport es un matemático
+Leslie Lamport es un computologo, incluso antes de que fuera identificado como tal, él cambio su manera de pensar los programas y los concibió más como un objeto matemático, algo que puede ser demostrado así se dio cuenta de que diseñaba algoritmos.
+Pues un algoritmo que no puede ser demostrado no es más que una conjetura, y el probar corresponde a las matemáticas.
+Los computologos tienden a pensar en términos de lenguajes de programación y suelen confundir programación (programming) con codificación (coding). Pero los programas están construidos en ideas por lo que no deben estar limitados por un lenguaje de progrmación, así estos tienen que hacer algo y transmitir esta idea antes de codificarlos.
+Es por esto por lo que Leslie Lamport decidió crear un lenguaje (TLA+) que fuese utilizado para diseñar, modelar, documentar y verificar programas.
 
-Las personas suelen confundir programación (programming) con codificación (coding) 
+
+En el 2013 Leslie Lamport gano el Premio Turing, el cual es un premio de las Ciencias de la Computación otorgado anualmente por la Asociación para la Maquinaria Computacional (ACM) a quienes hayan contribuido de manera trascendental al campo de las ciencias de la computación, por sus contribuciones en los sistemas distribuidos, donde múltiples componentes en diferentes redes se coordinan para lograr un objetivo.
+
+Lamport nos dice “Un sistema distribuido es uno donde tu computadora puede terminar inutilizable por una computadora que no sabías que existía”.
+Mientras la computación no distribuida diferentes procesos se comunican usando la misma memoria, en la distribuida se comunican usando mensajes.
+
+Lamport se interesó en la computación distribuida cuando llego a sus manos un manuscrito de Paul R. Johnson y Robert H. Tomas, quienes trabajaban en un algoritmo para implementación de bases de datos distribuidas, estas bases de datos tienen múltiples copias en diferentes computadoras para que los programas de estás tuvieran rápido acceso a los datos.
+
+Lamport explica en su artículo como con la noción de causalidad (causality) nos da la posibilidad de resolver cualquier problema de computación construyendo una máquina de estados (state machine). La cual podemos pensarla como una computadora abstracta que lidia con una cosa a la vez: asegurarse que todas las computadoras en el sistema distribuido colaboren para implementar una sola máquina de estados.
+
+
+El algoritmo de la panaderia (bakery algorithm) utilizado para implementar la exclusión mutua, es decir, evitar que dos procesos usen la impresora al mismo tiempo. Utiliza números para identificar los procesos, pero lo que lo vuelve realmente es especial es que no requiere hacer suposiciones.
+
+
