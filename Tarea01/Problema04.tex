@@ -46,7 +46,7 @@ se vería como el siguiente gráfico:
     \node (15)  [vertex, label=90:$\overbrace{p_3}^{\{ID_1, ID_2\}}$] at (0,-3){};
     
     \node (4)  [vertex, label=90:$\underbrace{p_3}^{ID_1, ID_2}$] at  (9,1.2){};
-    \node (5)  [blueV, label=270:$\underbrace{p_1}_{ID_2}$] at (8,0){};
+    \node (5)  [blueV, label=270:$\underbrace{p_1}_{\{ID_2\}}$] at (8,0){};
     \node (6)  [vertex, label=270:$\underbrace{p_2}_{\{ID_1, ID_3\}}$] at (10,0){};
     % Sin aristas
     \node (16)  [vertex, label=90:$\overbrace{p_3}^{\{ID_1, ID_2\}}$] at  (10,-3){};
@@ -97,13 +97,105 @@ se vería como el siguiente gráfico:
   \end{tikzpicture}
 \end{figure}
 
-donde, a cada $p_i$ le corresponde un $ID_i$ de tal manera que
-para cada estado global se identifica si todos sus procesos fueron
-recibidos de manera exitosa, en caso de no ser así se colorean.
-Así,
+donde, a cada $p_i$ ($1 \leq i \leq 3$) le corresponde un $ID_i$ de
+tal manera que para cada estado global se identifica si todos sus
+procesos fueron recibidos de manera exitosa, en caso de no ser así
+se colorean.
+Así, por cada proceso, tenemos que
 \begin{enumerate}
-\item 
-\item 
-\item 
+\item Sabemos que, a lo más, un mensaje no le llegó a $p_1$,
+o no le llegó a $p_2$, o no le llegó a $p_3$ (de manera exclusiva).
+\item También sabemos que en el tiempo $0$ cada proceso envía
+un identificador $ID_i$ al resto de sus vecinos, entonces,
+para un proceso $p_i$ que no recibió un $ID$ tenemos que existen
+dos posibles casos\footnote{Cada proceso tiene dos vecinos, por trabajar
+con $K_3$, en este caso partícular.}.
 \end{enumerate}
+
+\textbf{Obs.} Los subíndices superiores o inferiores en cada gráfica
+nos dice que identificadores $ID_i$ que han recibido\footnote{El estado local
+del proceso.}.
+\newline
+
+A continuación mostramos un conjutnto  $A \subseteq P$, tal que cada proceso
+en el que no se pude distinguir, dentro del estado global, se conecten entre
+ellos
+
+\begin{figure}[ht!]
+  \centering
+  \begin{tikzpicture}
+  %%%%%%%%%%%%%%%%%% Nodos p_i
+    \node (1)  [vertex, label=270:$p_1$] at (0,0){};
+    \node (2)  [redV, label=90:$\overbrace{p_2}^{\{ID_1\}}$] at (2,0){};
+    \node (3)  [vertex, label=90:$p_3$] at (1,1.2){};
+    % Sin aristas
+    \node (13)  [vertex, label=270:$p_1$] at (-1,-4.2){};
+    \node (14)  [redV, label=270:$\underbrace{p_2}_{\{ID_3\}}$] at (1,-4.2){};
+    \node (15)  [vertex, label=90:$p_3$] at (0,-3){};
+    
+    \node (4)  [vertex, label=90:$p_3$] at  (9,1.2){};
+    \node (5)  [blueV, label=90:$\overbrace{p_1}^{\{ID_2\}}$] at (8,0){};
+    \node (6)  [vertex, label=270:$p_2$] at (10,0){};
+    % Sin aristas
+    \node (16)  [vertex, label=90:$p_3$] at  (10,-3){};
+    \node (17)  [blueV, label=270:$\underbrace{p_1}_{\{ID_3\}}$] at (9,-4.2){};
+    \node (18)  [vertex, label=270:$p_2$] at (11,-4.2){};
+
+    \node (10) [blackV, label=180:$\underbrace{p_{3}}_{\{ID_1\}}$] at (3, -6.2){};
+    \node (11) [vertex, label=270:$p_{1}$] at (4, -7.4){};
+    \node (12) [vertex, label=270:$p_{2}$] at (2, -7.4){};
+
+    % Sin aristas
+    \node (19) [blackV, label=360:$\underbrace{p_{3}}_{ID_2}$] at (7, -6.2){};
+    \node (20) [vertex, label=270:$p_{1}$] at (8, -7.4){};
+    \node (21) [vertex, label=270:$p_{2}$] at (6, -7.4){};
+
+    %%%%%%%%%%%%%%%%%%%%%% Aristas
+    \foreach \i in {1,2}
+    \draw [edge] let \n1={3} in (\i) to (\n1);
+    \foreach \i in {5,6}
+    \draw [edge] let \n1={4} in (\i) to (\n1);
+    \foreach \i in {11,12}
+    \draw [edge] let \n1={10} in (\i) to (\n1);
+    \foreach \i in {13,14}
+    \draw [edge] let \n1={15} in (\i) to (\n1);
+    \foreach \i in {17,18}
+    \draw [edge] let \n1={16} in (\i) to (\n1);
+    \foreach \i in {20,21}
+    \draw [edge] let \n1={19} in (\i) to (\n1);
+    \draw [edge]  (1) to (2);
+    \draw [edge]  (5) to (6);
+    \draw [edge]  (11) to (12);
+    \draw [edge]  (20) to (21);
+    \draw [edge]  (17) to (18);
+    \draw [edge]  (13) to (14);
+    
+    \node (L) at (-1,2){\textbf{P}};
+    \draw [edge]  (-2,3) to (12,3);
+    \draw [edge]  (-2,-9) to (12,-9);
+    \draw [edge]  (-2,3) to (-2,-9);
+    \draw [edge]  (12,3) to (12,-9);
+
+    % Conexiones
+    \draw [edge]  (2) to (14);
+    \draw [edge]  (2) to (5);
+    \draw [edge]  (2) to (17);
+    \draw [edge]  (2) to (10);
+    \draw [edge]  (2) to (17);
+    \draw [edge]  (2) to (19);
+    \draw [edge]  (5) to (14);
+    \draw [edge]  (5) to (17);
+    \draw [edge]  (5) to (10);
+    \draw [edge]  (5) to (19);
+    \draw [edge]  (10) to (19);
+    \draw [edge]  (10) to (14);
+    \draw [edge]  (10) to (17);
+    \draw [edge]  (14) to (17);
+    \draw [edge]  (19) to (14);
+    \draw [edge]  (19) to (17);
+  \end{tikzpicture}
+\end{figure}
+podemos observar que se ha ignorado la información no relevante para
+los procesos que no puede distinguir entre los demás estados.
+
 \hfill $\lhd$
