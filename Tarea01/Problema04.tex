@@ -113,8 +113,9 @@ con $K_3$, en este caso partícular.}.
 \end{enumerate}
 
 \textbf{Obs.} Los subíndices superiores o inferiores en cada gráfica
-nos dice que identificadores $ID_i$ que han recibido\footnote{El estado local
-del proceso.}.
+nos dice que identificadores $ID_i$ han recibido\footnote{El estado local
+del proceso.}. Además, se obvia que el proceso $p_i$ ya tiene en su
+estado local al identificador $ID_i$.
 \newline
 
 A continuación mostramos un conjutnto  $A \subseteq P$, tal que cada proceso
@@ -197,5 +198,30 @@ ellos
 \end{figure}
 podemos observar que se ha ignorado la información no relevante para
 los procesos que no puede distinguir entre los demás estados.
+\newline
 
+Por último, demos respuesta a la pregunta: ¿Es posible que cada
+proceso elija consistentemente uno de los $ID$s de entre los que
+recibió de forma tal que en cada estado global todos los procesos
+eligen el mismo $ID$?
+
+\textbf{R./} No, esto es \textit{falso} en general. Supongamos que en cada
+estado podemos elegir el mismo $ID_i$ para todos los procesos, basta con
+ver que pasa para algún estado global en donde un proceso $p_i$ no recibe
+exactamente el identificador $ID_j$\footnote{Este estado vive en $P$.}
+con $j \not= i$ y $1 \leq j \leq 3$.
+
+Caso partícular con $n = 3$, es que todos los procesos eligan a $ID_2$
+de manera consistente, claramente el estado global izquierdo superior no
+cumplirá esto, pues $p_2$ no ha recibido este $ID_2$. En este caso, hay
+más de un estado global que cumple no poder elegir de manera consistente
+este $ID$. Como hay al menos un proceso $p_i$ en algún estado global
+que no recibió un $ID_i$, y esto pasa para cada $ID_i$, la respuesta
+a la pregunta es no.
+
+Si solo existiera el caso ideal, donde todos los mensajes de $P$ llegan
+a su destino, entonces la respuesta a esta pregunta sería sí. Bajo esta
+condición y bajo la consideración de que haya, al menos, un $ID_i$ que
+haya logrado ser recibido por todos los procesos (exceptuando el proceso
+que envia), la respuesta sería sí.
 \hfill $\lhd$
