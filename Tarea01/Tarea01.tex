@@ -9,19 +9,51 @@
 \usepackage{fancyhdr}
 \usepackage{lipsum}
 \usepackage{float}
+\usepackage{amsfonts, amsthm}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{amssymb, latexsym, amsmath}
+\usepackage{amsthm}
+
+% Notas al pie.
+\renewcommand{\thefootnote}{\Roman{footnote}}
 
 % Evitar sangrías
 \setlength{\parindent}{0cm}
 
+% Letter colors.
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+\usepackage{listings}
+
+% Def. Dr. César.
+\usepackage{tikz}
+\usetikzlibrary{shapes,calc}
+\tikzstyle{edge}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.1pt]
+\tikzstyle{blueE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, blue]
+\tikzstyle{blackV}=[circle, fill=black, minimum size=6pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{blueV}=[circle, fill=blue, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redV}=[circle, fill=red, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redSV}=[semicircle, fill=red, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blueSV}=[semicircle, fill=blue, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blackSV}=[semicircle, fill=black, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{vertex}=[circle, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+
+% Proof
+\renewcommand*{\proofname}{\textbf{Soluci\'on:}}
 
 % Margins
-\addtolength{\textheight}{3cm}
+%\addtolength{\textheight}{3cm}
 
 \usepackage{amsmath}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{url}
+\usepackage{hyperref}
 
 %%Tablas con color
 \usepackage{xcolor, colortbl}
@@ -30,8 +62,17 @@
 
 \pagestyle{fancyplain}
 
-\title{Plantilla Facultad de Ciencias, UNAM}
+\title{Facultad de Ciencias, UNAM}
 \date{\today}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,      
+  urlcolor=cyan,
+  pdftitle={Overleaf Example},
+  pdfpagemode=FullScreen,
+}
 
 \begin{document}
 \fancyhead[r]{ Computación Distribuida 2023-1}

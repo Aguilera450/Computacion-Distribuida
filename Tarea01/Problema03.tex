@@ -1,5 +1,29 @@
 %%%%%%%%%%% Aquí va la solución al problema 1.
 \newpage
-3. Investigue y explica brevemente el protocolo TCP.
+\textbf{\textcolor{MidnightBlue}{3.}} Investigue y explica brevemente el protocolo TCP.
 ¿Es posible resolver el problema de los dos amantes
-si hay un canal TCP confiable entre ambos amantes?
+si hay un canal TCP confiable entre ambos amantes?\\
+
+TCP es el Protocolo de Control de Transmisión que permite establecer una
+conexión y el intercambio de datos entre dos anfitriones. Este protocolo
+proporciona un transporte fiable de datos. La comunicación se realizaría en
+base a paquetes o segmentos.\\
+
+Para establecer la conexión, es necesario que se reconozcan dos puntos de
+acceso y destino (cliente y servidor). Sin embargo, no importa qué parte
+hace de cliente y cuál hace de servidor. Lo único que necesita el protocolo
+TCP para establecer la conexión es que cada una de las partes cuente con una
+dirección IP y un puerto asignado.\\
+
+Su prioridad es que los datos (segmentos) lleguen correctamente al destinatario,
+sin errores, y, en orden. Si en la transmisión de los segmentos, se corrompiesen
+o perdiesen, automáticamente el protocolo TCP inicia la retransmisión. De está
+manera, se garantiza que los datos lleguen al destinatario sin errores,
+ya que este protocolo se encarga de solucionar cualquier tipo de problema.\\
+
+No es posible resolver el problema de los dos amantes si existe un canal TCP,
+solo nos garantiza una entrega confiable con un número infinito de
+reintentos/retransmisiones posibles. Conservandose, la prueba de imposibilidad
+del problema respecto al último mensaje que aún se mantiene. Por lo tanto,
+TCP no puede llegar a la misma decisión en ambas partes de la comunicación,
+como en el problema.
