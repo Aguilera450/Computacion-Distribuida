@@ -6,4 +6,5 @@
 *.log
 *.bcf
 *.run.xml
+*.tex.un~
 *.gitignore~
