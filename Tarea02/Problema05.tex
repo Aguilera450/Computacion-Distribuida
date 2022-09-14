@@ -1,3 +1,25 @@
 %%%%%%%%%%%%%%%%%%%%%%% Problema 5:
 \newpage
 \textbf{\textcolor{MidnightBlue}{5.}}
+Generaliza el algoritmo de Broadconvergecast para:
+\begin{enumerate}
+\item Construya un árbol generador, es decir,
+inicialmente cada proceso tendrá sus variables
+$PADRE = \perp$ e $HIJOS = \emptyset$ y conforme
+el algoritmo vaya avanzando en el número de
+rondas, esas variables se vayan actualizando.
+El proceso raíz (distinguido) debe conocer el
+momento en que se terminó de construir este árbol generador.
+
+\item Suponga que cada proceso tiene una entrada
+distinta para reportar algo (pueden ser información
+de sensores, lecturas, etc.) A partir del algoritmo
+anterior, indica las modificaciones que se tendrían
+que hacer en el algoritmo, para que se recolecte la
+información de estos procesos y la raíz tenga todas
+la entradas. Analiza la complejidad en bits, es decir,
+el total de bits que son enviados sobre los canales de
+comunicación
+
+(hint: Cada mensaje de información puede tomar $k$ bits)
+\end{enumerate}
