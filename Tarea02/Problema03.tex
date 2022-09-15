@@ -3,12 +3,38 @@
 \textbf{\textcolor{MidnightBlue}{3.}}
 Considera el algoritmo de BroadConvergecast visto en clase.
 \begin{enumerate}
-\item Prueba el siguiente lema:
-      
+\item Prueba el siguiente lema:    
       \guillemotleft Todo proceso $p_i$ a profundidad
       $D$, recibe el mensaje $<START>$ en tiempo $D$\guillemotright.
-\item Prueba el siguiente lema:
+
+      \textbf{Demostración por inducción sobre el sobre el camino formado por los $parents$}
       
+	\textbf{Caso base:}
+	Sea un árbol distribuido con la raíz sin hijos, por lo tanto la profundidad es 0. Además el mensaje lo recibe en tiempo 0. Por lo tanto se cumple.
+  
+	\textbf{Hipótesis inductiva:}
+	Sea un proceso $u$ en un árbol distribuido a profundidad $D$, el mensaje $<START>$ llegara en tiempo $D$
+	
+	\textbf{Paso inductivo:}
+	Sea $v$ un proceso en el árbol distribuido tal que $u = v.parent$, es decir, $u$ es padre de $v$ entonces la $profundidad(v) = profundidad(u)+1$ por hipótesis inducctiva $profundidad(v) = D+1$, además el mensaje tomara $D+1$ tiempo en llegar a $v$ por que tarda $D$ tiempo para llegar a $u$ y $v$ es hijo de $u$.
+	
+	$\qed$
+	
+\item Prueba el siguiente lema:      
       \guillemotleft Todo proceso $p_i$ a profundidad $D$
       envía su mensaje a la raíz en el tiempo $D+2*altura(p)$\guillemotright.
+
+
+      \textbf{Demostración por inducción sobre el sobre el camino formado por los $parents$}
+      
+	\textbf{Caso base:}
+	Sea un árbol distribuido con la raíz $u$ sin hijos, por lo tanto $profundidad(u)=0=altura(u)$. El mensaje lo recibe en tiempo 0. Por lo tanto se cumple $D+2*altura(u)=0+2+(0)=0$
+	
+	\textbf{Hipótesis inductiva:}
+	Sea un proceso $v$ en un árbol distribuido a profundidad $D$ envía su mensaje a la raíz en el tiempo $D+2*altura(v)$
+	
+	\textbf{Paso inductivo:}
+	Sea $u$ un proceso en el árbol distribuido tal que $u = v.parent$, es decir, $u$ es padre de $v$. Por hipótesis inductiva el proceso $v$, a profundidad $D$, envía su mensaje  en  $D+2*altura(v)$. Ya que $u$ es padre de $v$ su profundidad es $D-1$ y su altura es $altura(v)-1$ por tanto envia su mensaje en $(D-1)+2*(altura(v)-1)$
+	
+	$\qed$
 \end{enumerate} 

@@ -4,3 +4,57 @@
 ¿Se basan los algoritmos de BroadcastTree
 y ConvergeCast en el conocimiento acerca
 del número de nodos en el sistema? ¿Por qué?
+
+\textbf{Examinar el algoritmo BroadcastTree}
+
+El algoritmo requiere de  información acerca de los nodos, necesita conocer el número de hijos de un nodo para enviar el mensaje a estos, en la linea 5 y 8 realiza esta instrucción. Además requiere conocer a su PADRE para recibir un mensaje de el en la linea 7.
+
+\begin{algorithm}
+\caption{BroadcastTree(ID,soyRaiz,M)}\label{alg:cap}
+\begin{algorithmic}[1]
+\State $PADRE, HIJOS$
+
+\State Ejecutar inicialmente\\
+
+\If{soyRaiz}
+    \State $send(<M>)$ a todos en HIJOS
+\EndIf
+
+\State Al recibir $<M>$ de Padre
+
+\State $send(<M>)$ a todos en HIJOS
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\textbf{Examinar el algoritmo ConvergeCast}
+
+El algoritmo requiere de  información acerca de los nodos, necesita conocer el número de hijos de un nodo para saber si el nodo es una hoja y debe enviar el mensaje a su padre. En la linea 6 pregunta por la cantidad de hijos del nodo, luego en la 11 requiere esta información de nuevo.  Además requiere conocer a su PADRE pare enviarle el mensaje en las lineas 7 y 12.
+
+\begin{algorithm}
+\caption{ConvergeCast(ID,soyRaiz)}\label{alg:cap}
+\begin{algorithmic}[1]
+\State $PADRE \gets 0$
+\State $HIJOS \gets 0$
+\State $noRecibidos \gets 0$
+
+\State Ejecutar inicialmente\\
+
+\If{$|HIJOS| == 0$}\Comment{es una hoja}
+    \State $send(<ok>)$ a PADRE
+\EndIf
+
+\State Al recibir $<ok>$ de algún puerto en HIJOS
+
+\State $noRecibidos++$
+
+\If{$noRecibidos == |HIJOS|$}
+    \State $send(<ok>)$ a PADRE
+\EndIf
+
+\end{algorithmic}
+\end{algorithm}
+
+Sin embargo, ninguno de estos algoritmos requiere conocer el total de nodos en la red ya que avanza por la red mediante relaciones de padre-hijo.
