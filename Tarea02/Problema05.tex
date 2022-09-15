@@ -22,3 +22,86 @@ el total de bits que son enviados sobre los canales de
 comunicación (hint: Cada mensaje de información puede
 tomar $k$ bits).
 \end{enumerate}
+
+\textbf{Solución:}
+Para este ejercicio exhibamos el algoritmo que cumple
+con los requesitos de (1):
+
+\begin{algorithm}
+\caption{NewBroadconvergecast(ID,soyRaiz)}\label{alg:cap}
+\begin{algorithmic}[1]
+\State \code{PADRE} $\gets \bot$
+\State \code{HIJOS} $\gets \emptyset$
+\State \code{noVecinos} $\gets 0$
+
+\State \code{Ejecutar inicialmente:}\;
+
+\If{\code{ID = soyRaiz}}                     
+    \State \code{PADRE} $\gets \bot$\;
+    \State \code{send(<START>)} a todos los puertos;
+\EndIf
+\Comment{Hasta aquí termina ``Ejecutar inicialmente''.}
+
+\State Al recibir \code{<START>} desde algún puerto \code{P}:\;
+\If{\code{PADRE} $= \bot$}
+    \State \code{Padre $\gets$ P}\;    
+\EndIf
+\If{no hay puertos distintos al \code{PADRE}}
+    \State \code{send(<OK>)} a \code{PADRE}
+\Else
+    \State \code{send(<START>)} a los puertos distintos que \code{PADRE}
+\EndIf
+\Comment{Hasta aquí termina ``Al recibir \code{<START>} ...''.}
+
+\State Al recibir \code{<OK>} desde algún puerto \code{h}:
+\State \code{noVecinos}$++$
+\State \code{HIJOS} $\gets$ \code{h}
+\If{$|$\code{HIJOS}$|$, \code{noVecinos}, y el número de puertos menos uno son iguales}
+     \If{\code{soyRaiz}}
+        \State reportar terminación. El árbol esta construido.
+     \Else
+        \State \code{send(<OK>)} a \code{PADRE}
+     \EndIf
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Nota:} Suponemos que cada proceso conoce a sus vecinos.
+Conoce desde que puerto llega la información y a que puertos
+enviar las información correspondiente.
+\newline
+
+\hspace*{0.3cm} Para el punto (2), tenemos que:
+
+Cada proceso debería tener un conjunto como estructura
+de datos, en este conjunto guardaríamos la información
+de llegada (cada proceso le manda a su padre la información
+de llegada guardada en su propio conjunto). Si el proceso
+$p_i$ tiene la información del proceso $p_j$, entonces $p_i$
+mete esta información a su conjunto y esta no es duplicada
+(por la definición de conjunto).
+\newline
+
+Para el análisis de complejidad de este algoritmo supongamos
+que cada mensaje de información toma $k$ bits y que introducir
+nuevos elementos a los conjuntos de cada proceso toma tiempo c.
+
+Iniciemos pensando ¿qué pansa cuando la información ha llegado
+a las hojas del árbol? (esto incluye arboles degenerados como una
+lista). Para este punto cada proceso ha enviado la información de
+llegada a su padre hasta que, eventualmente, llega al proceso raíz.
+Entonces, cada nivel del árbol manda su información y la información
+del resto (en profundidad), así la información enviada es
+\[\frac{n \cdot (n - 1)}{2} \cdot k\]
+por nivel y donde $n$ es el nivel del en el que se encuentran los
+procesos a enviar su información.
+
+Este análisis no es sobre el tiempo, y como estamos trabajando con
+conjuntos. Entonces, podemos asegurar que las esturcturas conjunto
+tendrán al final exactamente $m \cdot k$ bits, donde $m$ es el número
+de información enviada (si cada proceso tiene exactamente un mensaje
+con información única, entonces $m$ tomará el valor de la cantidad
+de procesos).
+
+En tiempo, estamos cerca de una cantidad lineal de pasos (pues este algoritmo
+se ejecuta en cada proceso).
