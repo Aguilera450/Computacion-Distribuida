@@ -1,0 +1,17 @@
+%%%%%%%%%%% Aquí va la solución al problema 2.
+\newpage
+\textbf{\textcolor{MidnightBlue}{2.}}
+ Considera un sistema distribuido representado como una gráfica de tipo anillo, cuyos
+canales son bidireccionales, con n = mk procesos, con m > 1 y k es impar. Los procesos en las
+posiciones $0, k, 2k, . . . ,(m-1)k$ son marcados inicialmente como líderes, mientras que procesos
+en otras posiciones son seguidores. Todos los procesos tienen un sentido de dirección y pueden
+distinguir su vecino izquierdo de su vecino derecho, pero ellos no tienen información alguna
+acerca de sus ids.
+El algoritmo 1 está destinado a permitir que los líderes recluten seguidores. No es difícil ver que
+todo seguidor eventualmente se agrega a sí mismo a un árbol enraízado con padre en algún líder.
+Nos gustaría que todos esos árboles tuvieran aproximadamente el mismo número de nodos.
+
+\begin{itemize}
+	\item ¿Cuál es el tamaño mínimo y máximo posible de un árbol?
+	 \item Dibuja el resultado de una ejecución para el algoritmo con $k = 5$  y $m = 4.$
+\end{itemize}
