@@ -1,0 +1,73 @@
+\documentclass[tikz,border=3mm]{standalone}
+    \usetikzlibrary{arrows.meta,chains,positioning}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,calc}
+\tikzstyle{edge}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.1pt]
+\tikzstyle{blueE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, blue]
+\tikzstyle{orangeE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, orange]
+\tikzstyle{brownE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, brown]
+\tikzstyle{redE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, red]
+\tikzstyle{blackV}=[circle, fill=black, minimum size=6pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{blueV}=[circle, fill=blue, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{brownV}=[circle, fill=brown, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{orangeV}=[circle, fill=orange, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redV}=[circle, fill=red, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redSV}=[semicircle, fill=red, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blueSV}=[semicircle, fill=blue, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blackSV}=[semicircle, fill=black, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{vertex}=[circle, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+    
+\begin{document}
+\begin{tikzpicture}[
+    start chain = A going right,
+pics/AB/.style args = {#1/#2/#3}{code={
+    \draw[solid,-{Straight Barb[length=1mm]},very thick]
+        (-3mm,#1 2mm) -- node [#2,font=\footnotesize,inner sep=2pt] {#3} ++ (6mm,0mm);}
+                            },
+pics/BA/.style args = {#1/#2/#3}{code={
+    \draw[solid,{Straight Barb[length=1mm]}-,very thick]
+        (-3mm,#1 2mm) -- node [#2,font=\footnotesize,inner sep=2pt] {#3} ++ (6mm,0mm);}
+                            }
+                    ]
+    \begin{scope}[every node/.style={circle, draw, minimum size=1.5em, 
+          inner sep=2pt, on chain}]
+%          \node (19) [blackV, label=360:$\underbrace{p_{3}}_{ID_2}$] at (7, -6.2){};
+      \foreach \i in {1,...,4}   \node (\i) [vertex, label=270:$p_{\i}$] at (-18*\i: -13.5) {};
+      \foreach \i in {6,...,9}   \node (\i) [vertex, label=90:$p_{\i}$] at (-18*\i: -13.5) {};
+      \foreach \i in {11,...,14} \node (\i) [vertex, label=360:$p_{\i}$] at (-18*\i: -13.5) {};
+      \foreach \i in {16,...,19} \node (\i) [vertex, label=125:$p_{\i}$] at (-18*\i: -13.5) {};
+      \node (0)  [blueV, label=180:$p_0$]      at (0      :-14)   {};
+      \node (5)  [redV, label=125:$p_5$]       at (-5*18  :-13.5) {};
+      \node (10) [orangeV, label=360:$p_{10}$] at (-10*18 :-13.5) {};
+      \node (15) [brownV, label=90:$p_{15}$]   at (-15*18 :-13.5) {};
+%
+    \end{scope}
+    \begin{scope}[sloped]
+\draw[thick]    (0) --  pic [blueE] {AB= /left/ID}  (1)
+                (0) --  pic [blueE] {AB= -/left/ID} (19)
+                (19) -- pic [blueE] {AB= -/left/ID} (18)
+                (1) --  pic [blueE] {AB= /left/ID}  (2);
+%
+\draw[thick]    (15) --  pic [brownE] {AB=-/below/ID}  (14)
+                (15) --  pic [brownE] {BA= -/below/ID} (16)
+                (14) --  pic [brownE] {AB= -/below/ID} (13)
+                (16) --  pic [brownE] {BA= -/below/ID}  (17);
+%
+\draw[thick]    (5) --  pic [redE] {BA=-/below/ID}  (4)
+                (5) --  pic [redE] {AB= -/below/ID} (6)
+                (4) --  pic [redE] {BA= -/below/ID} (3)
+                (6) --  pic [redE] {AB= -/below/ID} (7);
+%
+\draw[thick]    (10) --  pic [orangeE] {BA= /right/ID}  (9)
+                (10) --  pic [orangeE] {BA= -/right/ID} (11)
+                (11) --  pic [orangeE] {BA= -/right/ID} (12)
+                (9)  --  pic [orangeE] {BA= /right/ID}  (8);
+
+\draw [edge] (2) to (3);
+\draw [edge] (7) to (8);
+\draw [edge] (12) to (13);
+\draw [edge] (17) to (18);
+    \end{scope}
+\end{tikzpicture}
+\end{document}
