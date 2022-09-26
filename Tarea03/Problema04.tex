@@ -67,7 +67,7 @@ Analiza la complejidad de tiempo y de mensajes.
 
 Este algoritmo utiliza dos algoritmos:
 \begin{enumerate}
-    \item Primero eligeLider para elegir un lider, el cual utiliza una variable para contar el número de rondas que depende de $total$, ya que al final se tiene $total=ronda$ por lo tanto su complejidad en tiempo es $total$ 
+    \item Primero eligeLider para elegir un lider, el cual utiliza una variable para contar el número de rondas que depende de $total$, ya que al final se tiene $total=ronda$ por lo tanto su complejidad en tiempo es $total=n$ 
 
     \item En la segunda parte se utiliza el algoritmo BFS usando el LIDER que se eligio antes. 
 
@@ -77,18 +77,18 @@ Este algoritmo utiliza dos algoritmos:
         \item $<parent>$, verifica si ya ha visitado sus vecinos, si lo hizo termina el algoritmo.
         \item $<already>$, verifica si ya ha visitado sus vecinos, si lo hizo termina el algoritmo.
     \end{enumerate}
-    Los casos descritos anteriormente se evaluan para cada nodo en $total$ en una ronda. Por tanto su complejidad es $total$
+    Los casos descritos anteriormente se evaluan para cada nodo en $n$ en una ronda. Podemos pensar que el peor de los casos se tendrá que la gráfica es un camino y el LIDER está en el centro de manera que tarda la máxima distacia entre el LIDER y cualquier vértice de la gráfica, es decir, su complejidad es $O(diam(G))$
 \end{enumerate} 
 
-Por lo tanto la complejidad de tiempo de todo el algoritmo es $total+total= 2(total)$
+Por lo tanto la complejidad de tiempo de todo el algoritmo es $O(n+diam(G))$
 
 
 \textbf{Complejidad de mensajes}
 
 Este algoritmo utiliza dos algoritmos:
 \begin{enumerate}
-    \item Primero eligeLider para elegir un lider, el cual por cada nodo $total$ envia un mensaje $<LIDER>$ a todos sus vecinos, en el peor caso tiene que enviarle mensajes a todos los nodos $total$ de nuevo (la gráfica es completa), por tanto su complejidad de mensajes es $total^2$ 
-    \item En la segunda parte se utiliza el algoritmo BFS usando el LIDER que se eligio antes. De manera similar cada nodo $total$ envia el mensaje $<BFS,ID>$ a sus vecinos con la diferencia de que si ya tiene un padre se envia el mensaje, por tanto su complejidad es $total^2$
+    \item Primero eligeLider para elegir un lider, el cual por cada nodo $total=n$ envia un mensaje $<LIDER>$ a todos sus vecinos, por tanto su complejidad es $sum_v n * deg(v) = O(n|E|)$
+    \item En la segunda parte se utiliza el algoritmo BFS usando el LIDER que se eligio antes. De manera similar cada nodo $total=n$ envia el mensaje $<BFS,ID>$ a sus vecinos con la diferencia de que si ya tiene un padre se envia el mensaje, por tanto su complejidad es $\sum_v n * deg(v) = O(n|E|)$
 \end{enumerate}
 
-Por lo tanto la complejidad de mensajes de todo el algoritmo es $total^2+total^2= 2(total^2)$
+Por lo tanto la complejidad de mensajes de todo el algoritmo es $O(2n|E|)$

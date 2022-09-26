@@ -1,5 +1,6 @@
 %%%%%%%%%%% Aquí va la solución al problema 5.
 \newpage
 \textbf{\textcolor{MidnightBlue}{5.}} El algoritmo puede mejorar su complejidad de tiempo si se ejecutan de forma paralela
-los dos algoritmos anteriores, es decir, si se ejecuta la elección de líder y la construcción del árbol BFS. Da un algoritmo distribuido que realice esto y muestra que es correcto. Adicionalmente,
-compara la complejidad de tiempo respecto al algoritmo anterior.
+los dos algoritmos anteriores, es decir, si se ejecuta la elección de líder y la construcción del árbol BFS. Da un algoritmo distribuido que realice esto y muestra que es correcto. Adicionalmente, compara la complejidad de tiempo respecto al algoritmo anterior.
+
+Creo que no es posible ejecutar de manera paralela los algoritmos porque construcción del árbol BFS depende de un lider que será la raíz del arbol, y mientras el algoritmo de elección de líder se ejecuta el lider puede cambiar el lider lo que puede cambiar el árbol que se estaba creando.
