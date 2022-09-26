@@ -6,9 +6,89 @@ arbitraria G, utilizando el algoritmo de elección de líder eligeLider para det
 árbol y también el algoritmo BFS. Analiza la complejidad de tiempo y de mensajes.
 
 \begin{algorithm}
-\caption{arbolGenerador}\label{alg:cap}
+\caption{arbolGeneradorConBFS(ID,total)}\label{alg:cap}
 \begin{algorithmic}[1]
-\State profundidadArbol = profundidadT(soyRaiz), nivelT = 0, vecinos = 0
-\State $PADRE, HIJOS, profundidad, soyRaiz=soyRaiz, string = ''$
+
+\State $PADRE = \bot, HIJOS = \emptyset, OTROS= \emptyset$
+\State $LIDER = \bot$
+
+\State Si no he recibido algún mensaje y no he decidido el lider
+    \If{$LIDER == \bot \ \ and \ \ PADRE == \bot$} \Comment{Algorimo eligeLider}
+        \State $LIDER = ID, ronda = 0$
+
+        \State Ejecutar en todo momento $t \geq 0$
+        \State $send<LIDER>$ a todos los vecinos
+        \State Al recibir mensaje de todos los vecinos en tiempo $t \geq1 $
+        \State $mensajes = \{<L_1>,<L_2>,...<L_d>\} \cup LIDER$
+        \State $LIDER = Max(mensajes)$
+        \State $ronda = ronda+1$
+
+        \If{ronda == total} \Comment{Termina elección de lider}
+
+
+        \If{$LIDER \ \ and \ \ PADRE == \bot$} \Comment{Algoritmo BFS}
+        \State $send<BFS,ID>$ a todos mis vecinos
+        \State PADRE = ID
+    \EndIf
+
+    \State Al recibir $<BFS,j>$ desde el vecino $p_j$:
+        \If{$PADRE == \bot$}
+            \State $Padre = j$
+            \State $send(<parent>)$ a $p_j$
+            \State $send(<BFS,ID>)$ a todos excepto $p_j$
+        \Else
+            \State $send(<already>)$ a $p_j$
+        \EndIf
+    \State Al recibir $<parent>$ desde el vecino $p_j$
+    \State $HIJOS = HIJOS \cup \{p_j\}$
+
+    \If{$HIJOS \cup OTROS == VECINOS-PADRE$}
+        \State \textbf{Terminar}
+    \EndIf
+
+    \State Al recibir $<already>$ dede $p_j$
+    \State $OTROS = OTROS \cup P_j$
+
+    \If{$HIJOS \cup OTROS == VECINOS-PADRE$}
+        \State \textbf{Terminar}
+    \EndIf
+
+
+
+        \EndIf
+    \EndIf
+    
 \end{algorithmic}
 \end{algorithm}
+
+Analiza la complejidad de tiempo y de mensajes.
+
+\textbf{Complejidad de tiempo}
+
+Este algoritmo utiliza dos algoritmos:
+\begin{enumerate}
+    \item Primero eligeLider para elegir un lider, el cual utiliza una variable para contar el número de rondas que depende de $total$, ya que al final se tiene $total=ronda$ por lo tanto su complejidad en tiempo es $total$ 
+
+    \item En la segunda parte se utiliza el algoritmo BFS usando el LIDER que se eligio antes. 
+
+    Al principio el LIDER le envia el mensaje $<BFS,ID>$ a todos su vecinos, los cuales pueden recibir:
+    \begin{enumerate}
+        \item $<BFS,ID>$, y si no tiene PADRE le envía un mensaje a sus vecinos y al nodo del que recibio el mensaje para convertirlo en su PADRE. Si tiene PADRE le envia un mensaje al nodo del que recibio el mensaje para avisarle.
+        \item $<parent>$, verifica si ya ha visitado sus vecinos, si lo hizo termina el algoritmo.
+        \item $<already>$, verifica si ya ha visitado sus vecinos, si lo hizo termina el algoritmo.
+    \end{enumerate}
+    Los casos descritos anteriormente se evaluan para cada nodo en $total$ en una ronda. Por tanto su complejidad es $total$
+\end{enumerate} 
+
+Por lo tanto la complejidad de tiempo de todo el algoritmo es $total+total= 2(total)$
+
+
+\textbf{Complejidad de mensajes}
+
+Este algoritmo utiliza dos algoritmos:
+\begin{enumerate}
+    \item Primero eligeLider para elegir un lider, el cual por cada nodo $total$ envia un mensaje $<LIDER>$ a todos sus vecinos, en el peor caso tiene que enviarle mensajes a todos los nodos $total$ de nuevo (la gráfica es completa), por tanto su complejidad de mensajes es $total^2$ 
+    \item En la segunda parte se utiliza el algoritmo BFS usando el LIDER que se eligio antes. De manera similar cada nodo $total$ envia el mensaje $<BFS,ID>$ a sus vecinos con la diferencia de que si ya tiene un padre se envia el mensaje, por tanto su complejidad es $total^2$
+\end{enumerate}
+
+Por lo tanto la complejidad de mensajes de todo el algoritmo es $total^2+total^2= 2(total^2)$
