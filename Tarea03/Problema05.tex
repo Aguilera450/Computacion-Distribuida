@@ -3,4 +3,69 @@
 \textbf{\textcolor{MidnightBlue}{5.}} El algoritmo puede mejorar su complejidad de tiempo si se ejecutan de forma paralela
 los dos algoritmos anteriores, es decir, si se ejecuta la elección de líder y la construcción del árbol BFS. Da un algoritmo distribuido que realice esto y muestra que es correcto. Adicionalmente, compara la complejidad de tiempo respecto al algoritmo anterior.
 
-Creo que no es posible ejecutar de manera paralela los algoritmos porque construcción del árbol BFS depende de un lider que será la raíz del arbol, y mientras el algoritmo de elección de líder se ejecuta el lider puede cambiar el lider lo que puede cambiar el árbol que se estaba creando.
+\begin{algorithm}
+    \caption{arbolGeneradorConBFS(ID,total)}\label{alg:cap}
+    \begin{algorithmic}[1]
+        \State $PADRE = \bot, \ \ HIJOS = \emptyset, \ \ OTROS = \emptyset$
+        \State Si no he recibido algún mensaje
+        \If{$PADRE == \bot$}
+            \State $LIDER = ID$ 
+            \State $send(<BFS,ID,LIDER>)$ a todos mis vecinos
+            \State $PADRE = ID$
+        \EndIf 
+
+
+        \State Al recibir $<BFS,ID, LIDER>$ desde el vecino $p_j$
+
+        \If{$PADRE == \bot$}
+            \State $PADRE = j$
+            \State $mensajes=\{<L_1>,<L_2>,\dots,<L_d>\} \cup LIDER$
+            \State $LIDER = max(mensajes)$
+            
+            \State $send(<parent,LIDER>)$ a $p_j$
+            \State $send(<BFS,ID, LIDER>)$ a todos excepto $p_j$
+        \Else
+            \State $send(<already, LIDER>)$
+        \EndIf
+
+
+        \State Al recibir $<parent,LIDER>$ dede el vecino $p_j$
+        \State $mensajes=\{<L_1>,<L_2>,\dots,<L_d>\} \cup LIDER$
+        \State $LIDER = max(mensajes)$
+        \State $HIJOS = HIJOS \cup \{p_j\}$
+        \State $send(<LIDER)$ a todos en HIJOS
+
+        \If{$HIJOS \cup OTROS == VECINOS-PADRE$}
+            \State \textbf{Terminar}
+        \EndIf
+
+        \State Al recibir $<already, LIDER>$ desde $p_j$
+        \State $OTROS = OTROS \cup \{p_j\}$
+        \State $mensajes=\{<L_1>,<L_2>,\dots,<L_d>\} \cup LIDER$
+        \State $LIDER = max(mensajes)$
+
+        \If{$HIJOS \cup OTROS == VECINOS-PADRE$}
+            \State \textbf{Terminar}
+        \EndIf
+
+        \State Al recibir $<LIDER>$ desde $p_j$
+        \State $LIDER = <LIDER>$
+        \State $send(<LIDER>)$ a HIJOS
+
+    \end{algorithmic}
+\end{algorithm}    
+
+
+Muestra que el algoritmo es correcto.
+
+Al principio de la ejecución cualquier nodo que se tome al principio será el lider y la raíz del árbol BFS. Luego le envia $<BFS,ID,LIDER>$ a todos sus vecinos 
+
+El último segmento lineas 33-35 termina cuando el nodo ya no tiene hijos.
+
+Caso base:
+
+
+
+
+
+Compara la complejidad de tiempo respecto al algoritmo anterior.
