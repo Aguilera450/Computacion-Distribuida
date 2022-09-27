@@ -10,8 +10,7 @@ $O(m)$ y complejidad de tiempo $O(D)$. \newline
 
 $\rhd$ Para este problema damos por hecho que
        \code{BFS} construye un árbol enraízado
-       de diámetro $D$ y con $m$ aristas (esto
-       por la afirmación 9 y 11).
+       de diámetro $D$ (esto por la afirmación 9 y 11).
 
        Ahora, analicemos las complejidades de este algoritmo,
        para esto observemos dos posibles casos:
@@ -71,8 +70,23 @@ $\rhd$ Para este problema damos por hecho que
        
        
        \item La complejidad de mensajes es $O(m)$. \newline
+              
+       Sabemos que cada proceso envía sus respectivos mensajes
+       a sus vecinos, exceptuando a su padre. Eventualmente
+       los procesos ocupan como puerto de salida a todas las
+       aristas que conecten a sus vecinos, como la gráfica es
+       conexa, entonces al finalizar el algoritmo se utilizan
+       todas las aristas.
+
+       En el peor de los casos, un proceso que recibe \code{parent}
+       ya tiene asignado a un padre, entonces debe regresarle
+       \code{already} por el mismo puerto. La complejidad de mensajes
+       será, entonces
+       \[m + c \cdot m \in O(m)\]
+       donde $c$ nos indica la cantidad de procesos que caén en este
+       peor caso, como sabemos que esto no pasa cuando se recibe
+       \code{parent}, el número de peores caso no es $m$.
        
-       Empecemos por 
        \end{enumerate}
 
 \hfill $\lhd$
