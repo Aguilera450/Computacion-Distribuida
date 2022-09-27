@@ -12,7 +12,7 @@ los dos algoritmos anteriores, es decir, si se ejecuta la elección de líder y 
             \State $LIDER = ID$ 
             \State $send(<BFS,ID,LIDER>)$ a todos mis vecinos
             \State $PADRE = ID$
-        \EndIf 
+        \EndIf \\
 
 
         \State Al recibir $<BFS,ID, LIDER>$ desde el vecino $p_j$
@@ -25,45 +25,39 @@ los dos algoritmos anteriores, es decir, si se ejecuta la elección de líder y 
             \State $send(<parent,LIDER>)$ a $p_j$
             \State $send(<BFS,ID, LIDER>)$ a todos excepto $p_j$
         \Else
-            \State $send(<already, LIDER>)$ a $p_j$
-        \EndIf
+            \State $send(<already>)$ a $p_j$
+        \EndIf\\
 
 
         \State Al recibir $<parent,LIDER>$ dede el vecino $p_j$
-        \State $mensajes=\{<L_1>,<L_2>,\dots,<L_d>\} \cup LIDER$
-        \State $LIDER = max(mensajes)$
         \State $HIJOS = HIJOS \cup \{p_j\}$
-        \State $send(<LIDER)$ a todos en HIJOS
-
-        \If{$HIJOS \cup OTROS == VECINOS-PADRE$}
-            \State \textbf{Terminar}
-        \EndIf
-
-        \State Al recibir $<already, LIDER>$ desde $p_j$
-        \State $OTROS = OTROS \cup \{p_j\}$
+        
         \State $mensajes=\{<L_1>,<L_2>,\dots,<L_d>\} \cup LIDER$
         \State $LIDER = max(mensajes)$
-        \State $send(<LIDER>)$ a todos en HIJOS
+        \State $send(<LIDER>)$ a todos en HIJOS y a PADRE\\
 
-        \If{$HIJOS \cup OTROS == VECINOS-PADRE$}
-            \State \textbf{Terminar}
-        \EndIf
+        \State Al recibir $<already>$ desde $p_j$
+        \State $OTROS = OTROS \cup \{p_j\}$\\
+
 
         \State Al recibir $<LIDER>$ desde $p_j$
-        \State $LIDER = <LIDER>$
-        \State $send(<LIDER>)$ a HIJOS
+        
+        \If{$LIDER == <LIDER> \ \ and \ \ HIJOS \cup OTROS == VECINOS-PADRE$}
+            \State \textbf{Terminar}
+        \Else
+            \State $LIDER = <LIDER>$
+            \State $send(<LIDER>)$ a HIJOS y PADRE
+        \EndIf
 
     \end{algorithmic}
 \end{algorithm}    
 
-
-Muestra que el algoritmo es correcto.
 Podemos describir la ejecución del algoritmo como sigue:
-Al principio de la ejecución cualquier nodo que se tome al principio será el lider y la raíz del árbol BFS. Luego le envia $<BFS,ID,LIDER>$ a todos sus vecinos, los cuales si no tienen PADRE asigna $p_j$ como su padre y determinan el LIDER (el maximo de los mensajes $<LIDER>$ que ha recibido), lo asigna como su LIDER, le envia a $p_j$ un mensaje que lo asigna como su padre y le dice el nuevo LIDER, cuando el PADRE recibe el mensaje añade el nodo al conjunto de sus hijos, calcula nuevamente el LIDER y se lo envia a sus HIJOS. Los cuales registran su nuevo LIDER. Si el nodo ya tiene PADRE entonces envian el mensaje $<already,LIDER>$ al nodo $p_j$, el cual calcula nuevamente el LIDER y se lo comunica a sus hijos.
+Al principio de la ejecución cualquier nodo que se tome al principio será el lider y la raíz del árbol BFS. Luego le envia $<BFS,ID,LIDER>$ a todos sus vecinos, los cuales si no tienen PADRE asigna $p_j$ como su padre y determinan el LIDER (el maximo de los mensajes $<LIDER>$ que ha recibido), lo asigna como su LIDER, le envia a $p_j$ un mensaje que lo asigna como su padre y le dice el nuevo LIDER, cuando el PADRE recibe el mensaje añade el nodo al conjunto de sus hijos, calcula nuevamente el LIDER y se lo envia a sus HIJOS y a su PADRE. Los cuales registran su nuevo LIDER si este es diferente al nodo que tenian almacenado. Si el nodo ya tiene PADRE entonces envian el mensaje $<already>$ al nodo $p_j$, el cual inserta este al conjunto de sus hijos.
 
-El último segmento lineas 33-35 termina cuando el nodo ya no tiene hijos.
+El último segmento lineas 29-35 termina cuando el nodo ya visito a todos sus vecinos (o no tiene hijos) y el LIDER que recibe es igual al que tiene.
 
-\textbf{Afirmación}: El algoritmo {\tt arbolGeneradorID} es correcto, es decir, cumple con las propiedades de validez y acuerdo. Además construye un árbol con raiz.
+\textbf{Afirmación}: El algoritmo {\tt arbolGenerador} es correcto, es decir, cumple con las propiedades de validez y acuerdo. Además construye un árbol con raiz.
 
 \textbf{Acuerdo.} Todos los procesos acuerdan un mismo valor.
 
@@ -73,16 +67,23 @@ Al terminar cualesquiera 2 procesos $p_i$ y $p_j$ con variables $LIDER_i$ y $LID
 
 \textbf{Caso base:} $d=0$. Es claro que $LIDER=ID$ para el proceso con el ID máximo.
 
-\textbf{Hipótesis de inducción:} Para todo proceso a distancia $d-1$ del proceso con ID maximo tiene dicho $ID$ en su variable LIDER.
+\textbf{Hipótesis de inducción:} Para todo proceso a distancia $d-1$ del proceso con ID máximo tiene dicho $ID$ en su variable LIDER.
 
 \textbf{Paso inductivo:}
 Consideremos un proceso $p_i$ a distancia $d$ del proceso con el ID máximo. A partir de la H.I, sabemos que existe un proceso $p_j$ a distancia $d-1$ del proceso con ID máximo con $LIDER = ID.p_j$ vecino de $P_i$
-Ejecutando el algoritmo
 
+Por la ejecución del algoritmo sabemos $LIDER = ID.p_j$ cuando al recibir $<LIDER>$ sucede que 
+$$LIDER == <LIDER> \ \ and \ \ HIJOS \cup OTROS == VECINOS-PADRE$$ 
+y tenemos dos casos $p_j$ recibio el mensaje de su padre o de sus hijos, si lo recibio de su padre en este caso $p_i$ tiene el $LIDER=$ID máximo. Si lo recibio de sus hijos entonces tenemos otros dos casos el $ID$ de $p_j$ era el ID máximo o no lo era; en caso de que no lo fuera envia el nuevo ID máximo a su padre y a sus hijos, quienes caen nuevamente en este caso. Al final de la ejecución $LIDER == <LIDER>$ es decir el ID máximo que recibe del PADRE y de los HIJOS es el mismo.
 
 \textbf{Validez.} Al terminar el algoritmo todos los procesos tienen como LIDER un ID que fue entrada de algún proceso.
 
-Al terminar todo proceso tiene como LIDER un ID que fue entrada de algún proceso. Esto es fácil de observar, ya que $LIDER=max(mensajes)$ y esto es construido a partir de las propuestas de los vecinos.
+Al terminar todo proceso tiene como LIDER un ID que fue entrada de algún proceso. Esto es fácil de observar, ya que $LIDER=max(mensajes)$ y esto es construido a partir de las propuestas de los vecinos.\\
+
+
+Podemos garantizar que la gráfica que regresa {\tt arbolGenerador} es un árbol con raíz por los argumentos que se usan en BFS:
+1. Todo nodo es alcanzable desde la raíz si el sistema es conexo. Dado que a todo nodo se le asigna un padre es una contradicción suponer que no es alcanzable.
+2. No tiene ciclo. Si existiera un ciclo entonces un proceso tendría dos padres pero esto es una contradición porque un nodo solo tiene un padre por la linea 11.
 
 
 Compara la complejidad de tiempo respecto al algoritmo anterior.
