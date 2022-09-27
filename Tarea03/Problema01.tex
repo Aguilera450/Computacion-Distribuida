@@ -6,4 +6,65 @@ computadoras, y úsalo para modificar el algoritmo de flooding visto en clase, d
 líder comunique un mensaje m a los procesos a distancia a lo más d del líder (m y d son entradas
 del algoritmo); todos los procesos a distancia mayor no deberán recibir m. Da un breve argumento
 que demuestre que tu algoritmo es correcto, y también haz un análisis de tiempo y número de
-mensajes.
+mensajes.\\
+
+Time-to-live (TTL) se refiere al tiempo o “saltos” que un paquete tiene que
+realizar para existir en una red antes de que sea descartado por un
+router. Y funciona cuando un paquete de información es creado y enviado por internet,
+existe un riesgo de que este continúe pasando de un router a otro de manera
+indefinida. Para evitar esta situación, los paquetes están diseñados con
+una expiración llamada time-to-live o limite de saltos.\\
+
+Recordando el algoritmo de flooding visto en clase es:\\
+
+\begin{algorithm}
+\caption{flooding(ID,Lider,M)}\label{alg:cap}
+\begin{algorithmic}[1]
+
+\State flag = False
+\State Ejecutar inicialmente:
+    \If{ID = Lider}
+        \State flag = True
+        \State send ($<M>$) por todos los puertos
+    \EndIf
+\State Al recibir $<M>$ por algún puerto:
+    \If {not flag}
+        \State flag = True
+        \State send ($<M>$) por todos los puertos
+    \EndIf
+\end{algorithmic}
+\end{algorithm}
+
+Se propone que primero se escoja el lider y al hacerlo se envié el $(<M,1>)$,
+indicando su distancia (la cuál es $1$). Por otro lado, cuando se recibe
+$<M,count>$ y no han enviado su mensaje, y el entero es menor a todos los demás
+recibidos, implica que se envié el mensaje a todos los  puertos con su contador,
+el cuál irá incrementando en uno. La condición (la segunda), tiene que ser menor
+para asegurar que se envié a 'uno antes' de su predecesor $D$.\\
+
+\begin{algorithm}
+\caption{TTL(ID,Lider,M,D)}\label{alg:cap}
+\begin{algorithmic}[1]
+
+\State flag = False
+\State Ejecutar inicialmente:
+    \If{ID = Lider}
+        \State flag = True
+        \State send ($<M,1>$) por todos los puertos \Comment{$1$ es su distancia}
+    \EndIf
+\State Al recibir $<M,count>$ por algún puerto: \Comment{count es un contador}
+    \If {not flag $\&$ count $<$ D}
+         \State flag = True
+      \State send $(<M,count++>)$ por todos los puertos \Comment{count incrementa en uno}
+    \EndIf
+\end{algorithmic}
+\end{algorithm}
+
+-\textbf{Análisis de tiempo:} \\
+Como todo proceso recibe el mensaje $M$ en a lo más tiempo $D+1$, en el mejor de los
+casos es $D$.\\
+-\textbf{Análisis de mensajes:} \\
+Como cada proceso envía solo una copia de $M$ a sus vecinos,
+así que cada arista transporta a lo más una copia de $M$ por mensaje. Por el
+algoritmo original, observamos que $M$ se envía a lo más $2$ veces por arista,
+por lo que la cantidad de mensajes es a lo más $2|E|$.
