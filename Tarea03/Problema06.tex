@@ -3,4 +3,76 @@
 \textbf{\textcolor{MidnightBlue}{6.}}
 Prueba la siguiente afirmación:
 
-El algoritmo BFS construye un árbol enraízado sobre un sistema distribuido con $m$ aristas y diámetro D, con complejidad de mensajes $O(m)$ y complejidad de tiempo $O(D)$.
+El algoritmo BFS construye un árbol enraízado
+sobre un sistema distribuido con $m$ aristas
+y diámetro D, con complejidad de mensajes
+$O(m)$ y complejidad de tiempo $O(D)$. \newline
+
+$\rhd$ Para este problema damos por hecho que
+       \code{BFS} construye un árbol enraízado
+       de diámetro $D$ y con $m$ aristas (esto
+       por la afirmación 9 y 11).
+
+       Ahora, analicemos las complejidades de este algoritmo,
+       para esto observemos dos posibles casos:
+       \begin{enumerate}
+       \item La complejidad de tiempo es $O(D)$.\newline 
+       
+       Sea $G$ una gráfica conexa de diametro $D$ a la cuál
+       se le aplica \code{BFS} y nos genera $T$ con algún
+       vértice distinguido $v$ como líder.
+       
+       Por las líneas 7 - 9, el líder $v$ se convierte en un
+       nodo enraízado para $T$. Ahora, ¿cuál es el número de
+       rondas antes de que nuestro algoritmo termine para todos
+       los procesos en $G$?, de acuerdo al algoritmo los
+       descendientes de $v$ en $T$ serán el resto de los nodos.
+       
+       El algoritmo, por proceso $p_i$, termina cuando
+       \code{Hijos $\cup$ Otros} contiene a todos los vecinos
+       del respectivo $p_i$, a excepción de su padre (líneas
+       21 y 26). Así, una vez que \code{BFS} inicia en $v$
+       los $p_i$ restantes no hacen nada (\code{BFS} ha iniciado
+       pero no tiene instrucciones de distribuirse aún), en cuanto
+       los vecinos de $p_i$ empiezan a realizar sus tareas,
+       empiezan a propagar su $ID$ para convertirse en padre, si
+       es que se cumple la condición necesaria.
+       
+       Pensemos en la trayectoria $t$  más larga que inicia en $v$ y
+       termina en el último proceso, $p$, en terminar. Esta
+       trayectoria tiene longitud equivalente al diámetro de $G$,
+       pues sino fuese así pasaría que
+       \begin{enumerate}
+       \item La longitud de $t$ es menor que \code{diam(G)}. En este
+       caso, existe (por definición de diámetro) algún proceso que
+       al conectarse con $t$ por alguna arista $e$ y que tiene como
+       vecino a $p$, permite que $t$ siga siendo trayectoria y de hecho
+       $t-e$ tiene longitud $1$ mayor que $t$, lo que contradice que
+       $t$ fuera la trayectoria más larga.
+       
+       \item La longitud de $t$ es mayor que \code{diam(G)}. En este
+       caso, $t$ debe contener al menos un ciclo por lo que $t$ no
+       sería trayectoria y esto es contradictorio.
+       \end{enumerate}
+       En conclusión $t$ es  de longitud igual que el diámetro de
+       $G$. En el momento en que $p$ recibe \code{parent} desde
+       alguno de sus puertos, ya el resto nodos han recibido
+       \code{parent} o lo están recibiendo de manera simultánea.
+       Esto pasa en la ronda $D -1$, pues es en la ronda $0$ donde
+       inicia a realizar sus tareas al menos un proceso ($v$).
+       En la siguiente ronda envia realiza sus tareas y recibe
+       sus respectivos mensajes. Si no terninara en esta ronda,
+       entonces hay un proceso que no tiene padre y $p$ no es
+       último!!, esto es contradictorio. Como $p$ termina en la
+       ronda siguiente a la que le llega padre, podemos notar
+       que este último proceso termina en tiempo
+       \[(D - 1) + 1 = D \in O(D)\]
+       
+       
+       
+       \item La complejidad de mensajes es $O(m)$. \newline
+       
+       Empecemos por 
+       \end{enumerate}
+
+\hfill $\lhd$
