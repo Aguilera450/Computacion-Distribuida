@@ -7,8 +7,8 @@ defmodule Worker do
     end)
   end
 
-  def find_primes(from, to)
-    Enum.filter[(from..to, & Algebra.is_prime?/1)]
+  def find_primes(from, to) do
+    Enum.filter((from..to), &Algebra.is_prime?/1)
   end
 
   def get_result do
