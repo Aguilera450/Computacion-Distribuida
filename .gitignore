@@ -1,6 +1,7 @@
 *.gz
 *.md~
 *.out
+*.fls
 *.tex~
 *.aux
 *.log
@@ -8,3 +9,4 @@
 *.run.xml
 *.tex.un~
 *.gitignore~
+*.fdb_latexmk

@@ -1,7 +1,14 @@
 %%%%%%%%%%% Aquí va la solución al problema 5.
 \newpage
-\textbf{\textcolor{MidnightBlue}{5.}} Un toro $n \times m$ es una versión dos dimensional de un anillo, donde un nodo en la posición $(i, j)$ tiene un vecino hacia el norte en $(i, j- 1)$, al este en $(i + 1, j)$, al sur en $(i, j + 1)$ y
-al oeste en $(i − 1, j)$. Esos valores se calculan módulo $n$ para la primera coordenada y módulo $m$ para la segunda; de este modo $(0, 0)$ tiene vecinos $(0, m − 1)$, $(1, 0)$, $(0, 1)$ y $(n − 1, 0)$.
-Supongamos que tenemos una red síncrona de paso de mensajes en forma de un toro $n \times m$, consistente de procesos anónimos idénticos, los cuáles no conocen n, m o sus propias coordenadas, pero tienen sentido de la dirección (es decir, puede decir cual de sus vecinos está al norte, este, etc.).
-\textbf{Pruebe o refute}: Bajo estas condiciones, ¿existe un algoritmo determinista que calcule cuando
-$n > m$?
+\textbf{\textcolor{MidnightBlue}{5.}} Un toro $n \times m$ es una versión
+dos dimensional de un anillo, donde un nodo en la posición $(i, j)$ tiene
+un vecino hacia el norte en $(i, j - 1)$, al este en $(i + 1, j)$, al sur
+en $(i, j + 1)$ y al oeste en $(i - 1, j)$. Esos valores se calculan módulo
+$n$ para la primera coordenada y módulo $m$ para la segunda; de este modo
+$(0, 0)$ tiene vecinos $(0, m - 1)$, $(1, 0)$, $(0, 1)$ y $(n - 1, 0)$.
+Supongamos que tenemos una red síncrona de paso de mensajes en forma de un
+toro $n \times m$, consistente de procesos anónimos idénticos, los cuáles
+no conocen n, m o sus propias coordenadas, pero tienen sentido de la dirección
+(es decir, puede decir cual de sus vecinos está al norte, este, etc.).
+\textbf{Pruebe o refute}: Bajo estas condiciones, ¿existe un algoritmo
+determinista que calcule cuando $n > m$?
