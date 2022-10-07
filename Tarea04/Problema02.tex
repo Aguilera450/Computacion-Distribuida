@@ -4,3 +4,65 @@
 Describe un algoritmo distribuido basado en $DFS$ que, en una gráfica arbitraria $G$ con $n$ vértices anónimos, asigne etiquetas únicas en el rango $[1, . . . , n]$ a los vértices de $G$. Muestra que es correcto.
 
 Hint: Puedes suponer que cada proceso conoce a sus vecinos aunque estos no tengan una etiqueta explicita.
+
+\begin{algorithm}
+    \caption{DFS()}
+    \begin{algorithmic}[1]
+    
+    \State etiquetas = []
+
+    \State Al inicio seleccionar un nodo al azar para empezar a enviar mensajes
+    
+    \State $Padre = \bot$
+    \State $Hijos = \emptyset$
+    \State $ID = 1$
+    \State Padre = ID
+    \State SinExplorar = todos los vecinos
+    \State explore(etiqueta)
+
+
+    \State Al recibir $<etiqueta>$ desde el vecino $p_j$:
+    
+    \If{Padre $== \bot$}
+        \State Padre = j
+
+        \State ID = etiqueta 
+        \State etiquetas.add(etiqueta)
+
+        \State elimina $p_j$ de SinExplorar
+        \State explore(ID+1)
+    \Else
+        \If{$numProcesos < numP$}
+            \State numProcesos = numP
+        \EndIf
+    
+        \State send($<already>$) a $p_j$:
+        \State elimina $p_j$ de SinExplorar
+    \EndIf
+    
+    \State Al recibir $<already>$ desde $p_j$
+        \State explore(numProcesos)
+    
+    \State Al recibir $<parent,numP>$
+        \If{$numProcesos < numP$}
+            \State numProcesos = numP
+        \EndIf
+    
+        \State Hijos $\cup {p_j}$
+        \State explore(numProcesos)
+    
+    
+    \Procedure{explore}{etiqueta}
+        \If{SinExplorar $\neq \emptyset$}
+            \State elegir $p_k$ en SinExplorar
+            \State eliminar $p_k$ de SinExplorar
+            \State send $(<M>)$ a $p_k$
+        \Else
+            \If{Padre $\neq$ ID}
+                \State send($<parent>$) a Padre
+            \EndIf
+        \EndIf
+    \EndProcedure
+    \end{algorithmic}
+    \end{algorithm}
+    

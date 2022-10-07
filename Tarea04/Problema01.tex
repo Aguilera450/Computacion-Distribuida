@@ -4,3 +4,66 @@
 Describe un algoritmo distribuido basado en $DFS$ que cuente el número de procesos
 en un sistema distribuido cuya gráfica $G$ es arbitraria. Al terminar de contar, debe informar a todos
 los procesos el resultado del conteo. Muestra que es correcto.
+
+
+\begin{algorithm}
+\caption{DFS(ID,soyLider)}
+\begin{algorithmic}[1]
+\State $Padre = \bot$
+\State $Hijos = \emptyset$
+\State numProcesos = 0
+\State SinExplorar = todos los vecinos
+
+\State Si no he recibido algún mensaje
+
+\If{soyLider and Padre $== \bot$}
+    \State Padre = ID
+    \State numProcesos = 1
+    \State explore(numProcesos)
+\EndIf
+
+\State Al recibir $<numP>$ desde el vecino $p_j$:
+
+\If{Padre $== \bot$}
+    \State Padre = j
+    \State numProcesos = numP + 1 
+    \State elimina $p_j$ de SinExplorar
+    \State explore(numProcesos)
+\Else
+    \If{$numProcesos < numP$}
+        \State numProcesos = numP
+    \EndIf
+
+    \State send($<already>$) a $p_j$:
+    \State elimina $p_j$ de SinExplorar
+\EndIf
+
+\State Al recibir $<already>$ desde $p_j$
+    \State explore(numProcesos)
+
+\State Al recibir $<parent,numP>$
+    \If{$numProcesos < numP$}
+        \State numProcesos = numP
+    \EndIf
+
+    \State Hijos $\cup {p_j}$
+    \State explore(numProcesos)
+
+
+\Procedure{explore}{numP}
+    \If{SinExplorar $\neq \emptyset$}
+        \State elegir $p_k$ en SinExplorar
+        \State eliminar $p_k$ de SinExplorar
+        \State send $(<numP>)$ a $p_k$
+    \Else
+        \If{Padre $\neq$ ID}
+            \State send($<parent, numP>$) a Padre
+        \EndIf
+        
+        \If{Padre $==$ ID and numProcesos $<$ numP}
+            \State numProcesos = numP
+        \EndIf
+    \EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
