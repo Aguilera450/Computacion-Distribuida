@@ -1,7 +1,91 @@
 %%%%%%%%%%% Aquí va la solución al problema 3.
 \newpage
 \textbf{\textcolor{MidnightBlue}{3.}}
-Modifica el algoritmo DFS para que se ejecute en tiempo a lo más $2|V|$ y no mande más de $2|E|$ mensajes, suponiendo que las aristas son bidireccionales. 
+Modifica el algoritmo DFS para que se ejecute en tiempo a lo más $2|V|$ y no
+mande más de $2|E|$ mensajes, suponiendo que las aristas son bidireccionales.
 
-Hint: Cuando un proceso recibe el mensaje {\tt M} por primer vez, este notifica a todos sus vecino pero envía el mensaje a sólo uno de ellos.
+Hint: Cuando un proceso recibe el mensaje {\tt M} por primer vez, este notifica
+a todos sus vecino pero envía el mensaje a sólo uno de ellos.\\
 
+\large
+% Algoritmo
+  \hfill\break
+  %%\rule{1\textwidth}{0.2mm}
+  \hspace*{.2cm} {\bf Algoritmo:} DFS Modificado.
+  \hfill\break
+  1. Padre = $\perp$
+  \hfill\break
+  2. Hijos = $\varnothing$
+  \hfill\break
+  3. sinExplorar = todos los vecinos
+  \hfill\break
+  4.
+  \hfill\break
+  5. Si no he recibido algún mensaje:
+  \hfill\break
+  6. \hspace{0.5cm} {\bf if} padre = $\perp$ {\bf then}
+  \hfill\break
+  7. \hspace{1cm} soyLider = ID
+  \hfill\break
+  8. \hspace{1cm} Padre = $p_i$
+  \hfill\break
+  9. \hspace{1cm} explore()
+  \hfill\break
+  10.
+  \hfill\break
+  11. Al recibir $<leader,nuevo-id>$ desde el vecino $p_j$:
+  \hfill\break
+  12. \hspace{0.5cm} {\bf if} soyLider $<$ nuevo-id {\bf then}
+  \hfill\break
+  13. \hspace{1cm} soyLider = nuevo-id
+  \hfill\break
+  14. \hspace{1cm} Padre = $p_j$
+  \hfill\break
+  15. \hspace{1cm} Hijos = $\varnothing$
+  \hfill\break
+  16. \hspace{1cm} sinExplorar = todos los vecinos, excepto $p_j$
+  \hfill\break
+  17. \hspace{1cm} explore()
+  \hfill\break
+  18. \hspace{0.5cm} {\bf else if} soyLider = nuevo-id {\bf then}
+  \hfill\break
+  19. \hspace{1cm} send $<alredy,soyLider>$ a $p_j$
+  \hfill\break
+  20. //De lo contrario, soyLider $>$ nuevo-id y el DFS para nuevo-id se detiene
+  \hfill\break
+  21.
+  \hfill\break
+  22. Al recibir $<soyLider,nuevo-id>$ desde el vecino $p_j$:
+  \hfill\break
+  23. \hspace{0.5cm} {\bf if} nuevo-id = soyLider {\bf then} explore()
+  \hfill\break
+  24.
+  \hfill\break
+  25. Al recibir $parent,nuevo-id>$ desde el vecino $p_j$:
+  \hfill\break
+  26. \hspace{0.5cm} {\bf if} nuevo-id = soyLider {\bf then}
+  \hfill\break
+  27. \hspace{1cm} $Hijos\cup \; \{p_j\}$
+  \hfill\break
+  28. \hspace{1cm} explore()
+  \hfill\break
+  29.
+  \hfill\break
+  30. procedure explore():
+  \hfill\break
+  31. \hspace{0.5cm} {\bf if} sinExplorar = $\varnothing$ {\bf then}
+  \hfill\break
+  32. \hspace{1cm} elegir $p_k$ en sinExplorar
+  \hfill\break
+  33. \hspace{1cm} eliminar $p_k$ de sinExplorar
+  \hfill\break
+  34. \hspace{1cm} send ($<leader,soyLider>$) a $p_k$
+  \hfill\break
+  35. \hspace{0.5cm} {\bf else}:
+  \hfill\break
+  36. \hspace{1cm} {\bf if} Padre $\neq$ ID {\bf then} send ($<parent,leader>$) a Padre
+  \hfill\break
+  37. \hspace{1.5cm} terminar
+  \hfill\break
+  %%\rule{1\textwidth}{0.2mm}
+  \hfill\break
