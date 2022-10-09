@@ -7,7 +7,7 @@ los procesos el resultado del conteo. Muestra que es correcto.
 
 
 \begin{algorithm}
-\caption{DFS(ID,soyLider)}
+\caption{contarProcesosDFS(ID,soyLider)}
 \begin{algorithmic}[1]
 \State $Padre = \bot$
 \State $Hijos = \emptyset$
@@ -67,3 +67,17 @@ los procesos el resultado del conteo. Muestra que es correcto.
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\textbf{Caso base.} 
+
+Sea $G$ una gráfica tal que $V_G=\{p_1\}$, por la linea 8 $contarProcesosDFS()= 1 $ lo cual es correcto.
+
+\textbf{Hipótesis de inducción}
+
+Para cualquier gráfica $G$ con $n$ vértices {\tt contarProcesosDFS()} cuenta la cantidad procesos de $G$
+
+Al inicio de la ejecución si no
+
+\textbf{Paso inductivo}
+
+Por demostrar que dada una gráfica $G$ con $n+1$ vértices {\tt asignarEtiquetasDFS()} asigna etiquetas únicas en el rango $[1,\dots, n+1]$.
