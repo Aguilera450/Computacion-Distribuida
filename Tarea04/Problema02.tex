@@ -62,9 +62,12 @@ Demostración por inducción:
 
 Demostración por inducción sobre $n$ número de vértices anónimos en $G$.
 
-\textbf{Caso base.} Sea $G$ una gráfica tal que $V_G=\{p_1\}$, por la linea $3$ el $ID(p_1)=1$ por lo tanto todos los vértices de $G$ tiene una etiqueta única y conoce las etiquetas de sus vecinos.
+\textbf{Caso base.} 
+
+Sea $G$ una gráfica tal que $V_G=\{p_1\}$, por la linea $3$ el $ID(p_1)=1$ por lo tanto todos los vértices de $G$ tiene una etiqueta única y conoce las etiquetas de sus vecinos.
 
 \textbf{Hipótesis de inducción}
+
 Para cualquier gráfica $G$ con $n$ vértices {\tt asignarEtiquetasDFS()} asigna etiquetas únicas en el rango $[1,\dots, n]$.
 Al inicio de la ejecución el nodo elegido tiene $ID(p_1)=1$ luego envía $<etiqueta, 1>$ a uno de sus vecinos $p_{j}$ este asigna $ID(p_j)=2$ si tiene vecinos diferentes del líder, es decir $SinExplorar \neq \emptyset$ de manera similar asigna un nuevo $ID$ una unidad mayor, es decir $ID(p_{j+1}) = ID(p_j)+1$, cuando el proceso $p_j$ ya no tenga vecinos por explorar le envía el mensaje $<parent,i>$ donde la $i$ es la última etiqueta asignada, cuando los vértices reciben $<parent,i>$ desde $p_j$ guardan este vecino en el conjunto de sus hijos y envían la etiqueta $i$ a su padre, cuando $Padre == ID$ termina la asignación de $ID$ de los vecinos de uno de los hijos del proceso con $ID=1$  y procede a enviar $<etiqueta,i>$, donde $i$ es el último $ID$ asignado, a otro de los hijos del proceso con $ID = 1$, de manera similar recorre los vecinos asignando un ID mayor al que recibieron. Hasta que el proceso con $ID = 1$ no tenga vértice por explorar el algoritmo termina.
 
