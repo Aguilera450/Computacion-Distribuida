@@ -1,14 +1,48 @@
 %%%%%%%%%%% Aquí va la solución al problema 5.
-\newpage
+
 \textbf{\textcolor{MidnightBlue}{5.}} Un toro $n \times m$ es una versión
 dos dimensional de un anillo, donde un nodo en la posición $(i, j)$ tiene
 un vecino hacia el norte en $(i, j - 1)$, al este en $(i + 1, j)$, al sur
 en $(i, j + 1)$ y al oeste en $(i - 1, j)$. Esos valores se calculan módulo
 $n$ para la primera coordenada y módulo $m$ para la segunda; de este modo
 $(0, 0)$ tiene vecinos $(0, m - 1)$, $(1, 0)$, $(0, 1)$ y $(n - 1, 0)$.
+
 Supongamos que tenemos una red síncrona de paso de mensajes en forma de un
 toro $n \times m$, consistente de procesos anónimos idénticos, los cuáles
 no conocen n, m o sus propias coordenadas, pero tienen sentido de la dirección
 (es decir, puede decir cual de sus vecinos está al norte, este, etc.).
+
 \textbf{Pruebe o refute}: Bajo estas condiciones, ¿existe un algoritmo
-determinista que calcule cuando $n > m$?
+determinista que calcule cuando $n > m$? \newline
+
+$\rhd$ Para este problema preguntémonos ¿qué necesitamos conocer para calcular
+si $n > m$ es verdad o falso para el ``toro'' $T$ descrito?, la respuesta a esta
+pregunta es que debemos conocer los valores de $n$ y $m$. Inicialmente no conocemos
+los valores de $m$ y $n$, ahora supongamos que eventualmente podemos conocer los
+valores de $n$ y $m$, las maneras de conocer estos valores se listan a continuación:
+\begin{enumerate}
+        \item Conocer el volumen de $T$. Esto implicaría tener una infinidad de procesos
+        y una infinidad de aristas que relacionen estos procesos\footnote{La topoogía de
+        $T$ es continua, para conocer su volumen necesitamos que nuestra red sea continua},
+        sin embargo, desconocemos si existe un algoritmo determinista que lo cálcule. Pues
+        lo anterior implicaría al problema de paro y por tanto nuestro algoritmo no terminaría.
+        Esto contradice el que podamos conocer $n$ y $m$ por medio del volumen de $T$.
+        
+        \item Conocer la superficie de $T$. Mismo caso que el anterior, pues la superficie
+        de $T$ es continua. Por tanto, por aquí tampoco se puede.
+        
+        \item Suponer que iniciamos un algoritmo determinista desde un proceso exterior
+        a $T$, esto es, que podamos conocer un proceso distinguido $p$ ubicado en la capa
+        externa de $T$. Si existe una circunferencia tangente a $90°$ de $T$ y $p$ se
+        encuentra en esta, entonces podemos dar indicaciones hacia todas las direcciones
+        posibles (todas a la vez). En cuanto lleguemos a $p$ nuevamente tendremos al menos
+        dos medidas. Sin embargo, suponiendo que nos resultan exactamente dos medidas y no
+        contamos ninguna diagonal circular, aunque nos resultará una medida mayor a la otra
+        (asumiendo que las aristas nos pueden ayudar a esto) no sabriamos cuál corresponde
+        a $n$ y cual a $m$. Por tanto, este no es un camino viable.
+\end{enumerate}
+
+En general, supongamos que existe tal algoritmo, entonces ese algoritmo tiene alguna manera
+de contar lo continuo de manera discreta (o discretizar lo continuo), esto es contradictorio
+a que nuestro algoritmo sea determinista.
+\hfill $\lhd$
