@@ -6,63 +6,74 @@ Describe un algoritmo distribuido basado en $DFS$ que, en una gráfica arbitrari
 Hint: Puedes suponer que cada proceso conoce a sus vecinos aunque estos no tengan una etiqueta explicita.
 
 \begin{algorithm}
-    \caption{DFS()}
+    \caption{asignarEtiquetasDFS()}
     \begin{algorithmic}[1]
-    
-    \State etiquetas = []
 
     \State Al inicio seleccionar un nodo al azar para empezar a enviar mensajes
-    
-    \State $Padre = \bot$
+
     \State $Hijos = \emptyset$
     \State $ID = 1$
     \State Padre = ID
     \State SinExplorar = todos los vecinos
-    \State explore(etiqueta)
+    \State etiqueta = ID
+    \State EXPLORE($<etiqueta,1>$)
 
-
-    \State Al recibir $<etiqueta>$ desde el vecino $p_j$:
+    \State Al recibir $<etiqueta,i>$ desde el vecino $p_j$:
     
     \If{Padre $== \bot$}
         \State Padre = j
-
-        \State ID = etiqueta 
-        \State etiquetas.add(etiqueta)
+        \State ID = i
 
         \State elimina $p_j$ de SinExplorar
-        \State explore(ID+1)
+        \State EXPLORE(etiqueta,i)
     \Else
-        \If{$numProcesos < numP$}
-            \State numProcesos = numP
-        \EndIf
-    
         \State send($<already>$) a $p_j$:
         \State elimina $p_j$ de SinExplorar
     \EndIf
     
     \State Al recibir $<already>$ desde $p_j$
-        \State explore(numProcesos)
+        \State EXPLORE(etiqueta)
     
-    \State Al recibir $<parent,numP>$
-        \If{$numProcesos < numP$}
-            \State numProcesos = numP
-        \EndIf
+    \State Al recibir $<parent,i>$ desde $p_j$
+    \State Hijos $\cup {p_j}$
+    \State EXPLORE(etiqueta,i)
+
     
-        \State Hijos $\cup {p_j}$
-        \State explore(numProcesos)
-    
-    
-    \Procedure{explore}{etiqueta}
+    \Procedure{explore}{etiqueta,i}
         \If{SinExplorar $\neq \emptyset$}
-            \State elegir $p_k$ en SinExplorar
-            \State eliminar $p_k$ de SinExplorar
-            \State send $(<M>)$ a $p_k$
-        \Else
+        \State $k=i,j=0$
+            \While{$j < |SinExplorar|$}
+                \State $k+=1$
+                \State send $(<etiqueta,k>)$ a $p_j$
+                \State eliminar $p_j$ de SinExplorar
+                \State $j+=1$
+            \EndWhile
+        \Else  
             \If{Padre $\neq$ ID}
-                \State send($<parent>$) a Padre
+                \State send($<parent, etiqueta>$) a Padre
             \EndIf
         \EndIf
     \EndProcedure
     \end{algorithmic}
     \end{algorithm}
     
+Por demostrar que el algoritmo es correcto, es decir, dada una gráfica arbitraria $G$ con n vértices anónimos, asigne etiquetas únicas en el rango $[1,\dots, n]$ a los vértices de $G$
+Demostración por inducción:
+
+Demostración por inducción sobre $n$ número de vértices anónimos en $G$.
+
+\textbf{Caso base.} 
+
+Sea $G$ una gráfica tal que $V_G=\{p_1\}$, por la linea $3$ el $ID(p_1)=1$ por lo tanto todos los vértices de $G$ tiene una etiqueta única y conoce las etiquetas de sus vecinos.
+
+\textbf{Hipótesis de inducción}
+
+Para cualquier gráfica $G$ con $n$ vértices {\tt asignarEtiquetasDFS()} asigna etiquetas únicas en el rango $[1,\dots, n]$.
+Al inicio de la ejecución el nodo elegido tiene $ID(p_1)=1$ luego envía $<etiqueta, 1>$ a uno de sus vecinos $p_{j}$ este asigna $ID(p_j)=2$ si tiene vecinos diferentes del líder, es decir $SinExplorar \neq \emptyset$ de manera similar asigna un nuevo $ID$ una unidad mayor, es decir $ID(p_{j+1}) = ID(p_j)+1$, cuando el proceso $p_j$ ya no tenga vecinos por explorar le envía el mensaje $<parent,i>$ donde la $i$ es la última etiqueta asignada, cuando los vértices reciben $<parent,i>$ desde $p_j$ guardan este vecino en el conjunto de sus hijos y envían la etiqueta $i$ a su padre, cuando $Padre == ID$ termina la asignación de $ID$ de los vecinos de uno de los hijos del proceso con $ID=1$  y procede a enviar $<etiqueta,i>$, donde $i$ es el último $ID$ asignado, a otro de los hijos del proceso con $ID = 1$, de manera similar recorre los vecinos asignando un ID mayor al que recibieron. Hasta que el proceso con $ID = 1$ no tenga vértice por explorar el algoritmo termina.
+
+\textbf{Paso inductivo}
+
+Por demostrar que dada una gráfica $G$ con $n+1$ vértices {\tt asignarEtiquetasDFS()} asigna etiquetas únicas en el rango $[1,\dots, n+1]$.
+
+Sea un vértice $p_{j+1}$ que no tiene etiqueta, pero sabemos que es vecino de al menos un vértice $p_j$, que por hipótesis inductiva tiene una etiqueta al igual que sus vecinos excepto $p_{j+1}$, por lo tanto SinExplorar de $p_j$ es $\{p_{j+1}\}$ y por la linea 28 en el procedimiento {\tt EXPLORE} $P_{j+1}$ recibe el mensaje:$<etiqueta,i>$, asigna a $p_j$ como su padre y $ID(p_{j+1})=ID(p_j)+1$, por lo tanto todos los vértices $n+1$ de $G$ tienen una etiqueta única en el rango $[1,\dots, n+1]$.
+

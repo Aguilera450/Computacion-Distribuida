@@ -7,7 +7,7 @@ los procesos el resultado del conteo. Muestra que es correcto.
 
 
 \begin{algorithm}
-\caption{DFS(ID,soyLider)}
+\caption{contarProcesosDFS(ID,soyLider)}
 \begin{algorithmic}[1]
 \State $Padre = \bot$
 \State $Hijos = \emptyset$
@@ -30,10 +30,6 @@ los procesos el resultado del conteo. Muestra que es correcto.
     \State elimina $p_j$ de SinExplorar
     \State explore(numProcesos)
 \Else
-    \If{$numProcesos < numP$}
-        \State numProcesos = numP
-    \EndIf
-
     \State send($<already>$) a $p_j$:
     \State elimina $p_j$ de SinExplorar
 \EndIf
@@ -42,15 +38,17 @@ los procesos el resultado del conteo. Muestra que es correcto.
     \State explore(numProcesos)
 
 \State Al recibir $<parent,numP>$
-    \If{$numProcesos < numP$}
-        \State numProcesos = numP
-    \EndIf
-
     \State Hijos $\cup {p_j}$
     \State explore(numProcesos)
 
 
 \Procedure{explore}{numP}
+    \If{numProcesos $<$ numP}
+        \State numProcesos = numP
+        \For{$p_i$ en Vecinos}
+        \State send$(<numP>)$ a $p_i$
+        \EndFor
+    \EndIf
     \If{SinExplorar $\neq \emptyset$}
         \State elegir $p_k$ en SinExplorar
         \State eliminar $p_k$ de SinExplorar
@@ -59,11 +57,21 @@ los procesos el resultado del conteo. Muestra que es correcto.
         \If{Padre $\neq$ ID}
             \State send($<parent, numP>$) a Padre
         \EndIf
-        
-        \If{Padre $==$ ID and numProcesos $<$ numP}
-            \State numProcesos = numP
-        \EndIf
     \EndIf
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\textbf{Caso base.} 
+
+Sea $G$ una gráfica tal que $V_G=\{p_1\}$, por la linea 8 $contarProcesosDFS()= 1 $ lo cual es correcto.
+
+\textbf{Hipótesis de inducción}
+
+Para cualquier gráfica $G$ {\tt contarProcesosDFS()} cuenta la cantidad procesos $n$ de $G$
+Al inicio de la ejecución si no ha recibido ningún mensaje el líder asigna como padre a si mismo y el $numProcesos = 1$, luego explora a sus vecinos enviándoles el número de procesos al momento, si el numero de procesos actual es menor al que recibió actualiza la cantidad de procesos y le envía la nueva cantidad de procesos $<numP>$ a sus vecinos, cuando el vértice recibe el mensaje $<numP>$ aumenta en uno el número de procesos y se lo envía a sus vecinos, cuando ya no quedan más vecinos $p_j$ le envía el mensaje $<parent,numP>$ al vértice del que llego el último mensaje $<numP>$, es decir $p_{j-1}$ el cual inserta $p_j$ en el conjunto de sus hijos  y explora a sus vecinos donde nuevamente verifica que los vértices conozcan el último conteo de procesos, el algoritmo termina cuando $numProcesos \geqslant  numP$, $Padre == ID$ y SinExplorar$=\emptyset$.
+
+\textbf{Paso inductivo}
+
+Por demostrar que dada una gráfica $G'$ tal que $V_{G'}=V_G \cup \{p_{i+1}\}$ el algoritmo {\tt cuentaProcesosDFS} devuelve $n+1$ vértices.
+Por hipótesis de inducción el algoritmo {\tt contarProcesosDFS()} cuenta la cantidad procesos $n$ hasta el vértices $p_i$. Como $p_i$ es vecino de $p_{i+1}$, SinExplorar=$\{p_{i+1}\}$, entonces $p_{i+1}$ recibe $<numP>$ asigna a $p_i$ como su padre, $numProcesos=n+1$ por la linea 14 y ejecuta el proceso {\tt EXPLORE} el cual como el numProcesos ha cambiado envía el mensaje $<numP>$ a sus vecinos, de forma que estos tienen el nuevo número de procesos $n+1$ y lo envían a los demás vecinos hasta que $numProcesos \geqslant  numP$, $Padre == ID$ y SinExplorar$=\emptyset$. 
