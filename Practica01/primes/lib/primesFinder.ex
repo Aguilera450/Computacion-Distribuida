@@ -10,7 +10,8 @@ defmodule PrimesFinder do
 
   def write_primes(primes) do
     file_primes = File.open!("primes.txt",[:write])
-    IO.binwrite(file_primes,primes)
+    IO.write(file_primes,inspect(primes, pretty: true, limit: :infinity))
+    File.close(file_primes)
   end
 
   def write_time(start_time,finish_time) do
