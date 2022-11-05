@@ -1,9 +1,10 @@
 defmodule Pan do
   def hayPan? do
-    n=Enum.random(100)
+    n=Enum.random(0..10)
     if n > 0 do
-      :true
+      {:true,n}
+    else
+      {:false,n}
     end
-    :false
   end
 end
