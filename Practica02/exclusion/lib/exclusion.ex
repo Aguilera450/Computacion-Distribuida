@@ -13,7 +13,15 @@ defmodule Exclusion do
 
   """
   def hello do
-    Alice.start()
-    Bob.start()
+    alice = Alice.start()
+    bob = Bob.start()
+
+    Alice.enviaMensaje(self(),:acquiere2,[:acquiere2])
+    Bob.recibeMensajes()
+
+
+
+    #hello()
+
   end
 end
