@@ -17,9 +17,8 @@ defmodule Exclusion do
     bob = Bob.start()
 
     Alice.enviaMensaje(self(),:acquiere2,[:acquiere2])
-    Bob.recibeMensajes()
-
-
+    estado_bob= Bob.recibeMensajes()
+    estado_alice=Alice.recibeMensajes()
 
     #hello()
 
