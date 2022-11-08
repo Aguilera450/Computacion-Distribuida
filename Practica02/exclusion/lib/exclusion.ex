@@ -13,10 +13,10 @@ defmodule Exclusion do
 
   """
   def hello do
-    alice = Alice.start()
     bob = Bob.start()
+    alice = Alice.start()
 
-    Alice.enviaMensaje(self(),:acquiere2,[:acquiere2])
+    Alice.enviaMensaje(self(),:acquire1,[:acquire1])
     estado_bob= Bob.recibeMensajes()
     estado_alice=Alice.recibeMensajes()
 
