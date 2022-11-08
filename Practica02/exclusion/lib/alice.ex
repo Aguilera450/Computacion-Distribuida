@@ -1,5 +1,6 @@
 defmodule Alice do
   def start do
+    IO.inspect("Alice llego a casa")
     spawn(fn -> send(self(),{:acquire1,[:acquire1]}) end)
   end
 
@@ -51,7 +52,14 @@ defmodule Alice do
     else
       send(self(),{:release2,mailbox++[:release2]})
     end
-    end
+    #if(flag_b1)
+      #if (flag_a2 and flag_a2) or (!flag_a2 and !flag_b2) do
+       # Process.sleep(100)
+        #recibeMensajes()
+      #end
+    #end
+    #if ! Pan.hayPan? do
+       # send(self(),{[flag_b1,flag_b2],mailbox})
+    #end
   end
-
 end

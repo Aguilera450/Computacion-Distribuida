@@ -1,5 +1,6 @@
 defmodule Bob do
   def start do
+    IO.inspect("Bob llego a casa")
     spawn(fn -> send(self(),{:acquire1,[:acquire1]}) end)
   end
 
@@ -10,23 +11,23 @@ defmodule Bob do
     receive do
       # Verificar A1, si Bob ha recibido al menos un acquire1 y no ha recibido release1
       {:acquire1, mailbox} -> if Enum.member?(mailbox,:release1) do
-        IO.puts("Recibi :acquire1 y he recibido :release1. no se cumple A1")
+        IO.puts("Bob dice recibi :acquire1 y he recibido :release1. no se cumple A1")
       else
-        IO.inspect("Recibi :acquire1 y no he recibido :release1, se cumple A1")
+        IO.inspect("Bob dice recibi :acquire1 y no he recibido :release1, se cumple A1")
         flag_a1=true
         envia_banderas_bob(flag_a1,flag_a2,mailbox)
       end
 
       # Verificar A2, es decir, si ha recibido release1
       {:acquire2, mailbox} -> if Enum.member?(mailbox,:release2) do
-        IO.puts("Recibi :acquire2 y he recibido :release2, no se cumple A2")
+        IO.puts("Bob dice recibi :acquire2 y he recibido :release2, no se cumple A2")
       else
         flag_a2=true
-        IO.inspect("Recibi :acquire2 y no he recibido :release2, se cumple A2")
+        IO.inspect("Bob dice recibi :acquire2 y no he recibido :release2, se cumple A2")
         envia_banderas_bob(flag_a1,flag_a2,mailbox)
       end
-      {[flag_b1,flag_b2],mailbox} -> IO.inspect("Recibi banderas Alice")
-      _ -> IO.inspect("Bob recibio otro mensaje")
+      {[flag_b1,flag_b2],mailbox} -> IO.inspect("Bob dice recibi banderas Alice")
+      _ -> IO.inspect("Bob dice recibi otro mensaje")
     end
   end
 
