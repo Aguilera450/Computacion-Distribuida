@@ -1,12 +1,17 @@
 %%%%%%%%%%% Aquí va la solución al problema 5.
-\newpage
-\textbf{\textcolor{MidnightBlue}{5.}} El algoritmo de consenso bizantino visto en clase, resuelve el problema del consenso
-bizantino para $f < \frac{n}{4}$ procesos. Para valores grandes de $f$, el algoritmo podría fallar por violar una o más de las propiedades de terminación, validez o acuerdo. Para este algoritmo:
+\textbf{\textcolor{MidnightBlue}{5.}} El algoritmo de consenso bizantino visto en clase, resuelve el
+problema del consenso bizantino para $f < \frac{n}{4}$ procesos. Para valores grandes de $f$, el
+algoritmo podría fallar por violar una o más de las propiedades de terminación, validez o acuerdo.
+Para este algoritmo:
 \begin{itemize}
-    \item ¿Qué tan grande debe ser $f$ para evitar terminación?
-    \item ¿Qué tan grande debe ser $f$ para evitar validez?
-    \item ¿Qué tan grande debe ser $f$ para evitar acuerdo?
+    \item ¿Qué tan grande debe ser $f$ para evitar terminación?\\
+Entonces solo basta con que $f\geq t$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \item ¿Qué tan grande debe ser $f$ para evitar validez?\\
+Como en la terminaciòn tenemos que $f\geq t$, es suficiente para que no se llegue tener validez en el consenso, para lograr tener validez el consenso debio haber sido enviado por un algun proceso en el sistema, entonces sin nunca hay terminaciòn por ende no habrà validez.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \item ¿Qué tan grande debe ser $f$ para evitar acuerdo?\\
+Solo basta con que $f\geq \frac{n}{3}$.
 \end{itemize}
-Asuma que los procesos conocen la nueva cota $f$, y cualquier umbral en el algoritmo que use $f$, se ajusta para corresponder con esta nueva cota. Argumente detalladamente su respuesta.
-
-
+Asuma que los procesos conocen la nueva cota $f$, y cualquier umbral en el algoritmo que use $f$,
+se ajusta para corresponder con esta nueva cota. Argumente detalladamente su respuesta.
