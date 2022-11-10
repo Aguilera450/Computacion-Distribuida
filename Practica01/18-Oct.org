@@ -1,0 +1,35 @@
+* Server Processes
+Definimos un módulo que crea nuevos procesos que nos permiten
+enviar o recibir mensajes de otros procesos. El servidor crea
+un proceso auxiliar que ejecuta el "recive" y "send".
+
+** Agregando estados
+def start do
+  spawn(fn ->
+    initial_state = ...
+    spawn(&loop/0)
+  end)
+
+.
+.
+.
+
+end
+
+
+** Modificando estados
+
+Los nuevos mensajes se mandan y se usa
+loop para mandar a llamar el algoritmo 
+con los mensajes nuevos.
+
+*** Para medir el tiempo
+Se usan las funciones que se encuentran en el módulo
+Time de Elixir. 
+
+**** Función
+Time.utc_now()
+
+** Dos algoritmos
+*** Algoritmo que divide en rangos
+*** Algoritmo que recibe los números.

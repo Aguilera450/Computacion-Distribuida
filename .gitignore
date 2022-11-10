@@ -1,7 +1,11 @@
 *.gz
 *.md~
 *.out
+*.nav
 *.fls
+*.snm
+*.vrb
+*.toc
 *.tex~
 *.aux
 *.log

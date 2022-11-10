@@ -1,0 +1,95 @@
+\documentclass[9pt]{beamer}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Use roboto Font (recommended)
+\usepackage[sfdefault]{roboto}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Define where theme files are located. ('/styles')
+\usepackage{styles/fluxmacros}
+\usefolder{styles}
+% Use Flux theme v0.1 beta
+% Available style: asphalt, blue, red, green, gray 
+\usetheme[style=asphalt]{flux}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Extra packages for the demo:
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{ragged2e}
+\usepackage{schemabloc}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Informations
+\title{Computación distribuida.}
+\subtitle{Aplicaciones de Relojes Vectoriales.}
+\author{Integrantes:\\
+        Aguilera Moreno Adrian\\
+        Torres Valencia Kevin Jair\\
+        Pérez Romero Natalia Abigail}
+\institute{Facultad de Ciencias, UNAM}
+\date{\today}
+\titlegraphic{Imagenes/im1.png}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\begin{document}
+
+% Generate title page
+\titlepage
+
+\begin{frame}
+ \frametitle{Tabla de contenido.}
+ \tableofcontents
+\end{frame}
+
+\section{Presentation}
+
+\subsection{introduction}
+
+\input{./Introduccion}
+
+\def\beamer@mytheme@style{green}
+\input{./Problema01}
+
+\subsection{fonts}
+\input{./Problema02}
+
+\subsection{footnotes}
+\input{./Problema03}
+
+
+\section{Collections}
+
+\subsection{lists}
+\input{./Problema04}
+
+\subsection{tables}
+\input{./Problema05}
+
+\subsection{blocs}
+\input{./Problema06}
+\input{./Problema07}
+\input{./Problema08}
+\input{./Problema09}
+\input{./Problema10}
+
+% The [plain] causes the headlines, footlines, and sidebars 
+% to be suppressed. Useful for showing large pictures
+\input{./Problema11}
+
+\section{Next section}
+\subsection{subsection 1}
+\subsection{subsection 2}
+\subsection{subsection 3}
+\section{One more section}
+\subsection{subsection 1}
+\subsection{subsection 2}
+\subsection{subsection 3}
+
+\input{./Problema12}
+\end{document}
