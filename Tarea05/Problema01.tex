@@ -68,8 +68,8 @@ Contesta lo siguiente:
     Recuerda que $t \leq f$ es el número de fallas que realmente ocurren en una
     ejecución dada.\\
     Si $t$ es el número de fallas que realmente ocurren en una ejecución y $f$ es el número de fallas de tipo paro.
-    Notemos que el algoritmo toma dos rondas para poder llegar a consenso: en la primer ronda recibe los mensajes y los almacena en la variable $vista$ por la linea 10. Aplicar $or$ a las flags que al momento son $false$, y luego al verificar $rec[r-1]==rec[r]$ y actualice $flag=true$. Para que en la segunda ronda decida el $max$ a partir de $vista$, la cual es la union de las vistas propuestas por los procesos en la ronda uno. 
-    
+    Notemos que el algoritmo toma dos rondas para poder llegar a consenso: en la primer ronda recibe los mensajes y los almacena en la variable $vista$ por la linea 10. Aplicar $or$ a las flags que al momento son $false$, y luego al verificar $rec[r-1]==rec[r]$ y actualice $flag=true$. Para que en la segunda ronda decida el $max$ a partir de $vista$, la cual es la union de las vistas propuestas por los procesos en la ronda uno.
+
     De manera similar al algoritmo del consenso visto en clase se tardara $t+1$ rondas en llegar a un consenso pero notemos que si encontramos un error más de los esperados son necesarias dos rondas más para llegar a un consenso.
 
     \item Haz un análisis del número máximo de mensajes que se envían en una
@@ -79,6 +79,7 @@ Contesta lo siguiente:
     \[\sum_{i=0}^r rec[i] = 1+rec[0]+1+rec[1]\]
 \end{enumerate}
 
+\newpage
 \begin{figure}
     \includegraphics[width=\textwidth]{consensoTemprano.png}
 \end{figure}
