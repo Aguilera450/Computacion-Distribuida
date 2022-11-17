@@ -13,14 +13,32 @@ defmodule Exclusion do
 
   """
   def hello do
-    bob = Bob.start()
+
+    pan = Pan.start()
+    cant_pan = Pan.crea_pan()
+
     alice = Alice.start()
-
-    Alice.enviaMensaje(self(),:acquire1,[:acquire1])
-    estado_bob= Bob.recibeMensajes()
+    bob = Bob.start()
+    Alice.envia_mensaje_alice(self(),:acquire1,[:acquire1])
+    Bob.envia_mensaje_bob(self(),:acquire1,[:acquire1])
     estado_alice=Alice.recibeMensajes()
+    estado_bob= Bob.recibeMensajes()
+    cant_pan=Pan.loop(cant_pan)
 
-    #hello()
+    Bob.decide_bob(estado_bob,estado_alice)
+    Process.sleep(1200)
+
+
+    Alice.envia_mensaje_alice(self(),:acquire1,[:acquire1])
+    Bob.envia_mensaje_bob(self(),:acquire1,[:acquire1])
+    estado_alice=Alice.recibeMensajes()
+    estado_bob= Bob.recibeMensajes()
+    cant_pan=Pan.loop(cant_pan)
+
+    Alice.decide_alice(estado_bob,estado_alice)
+    Process.sleep(1200)
+
+    hello()
 
   end
 end
