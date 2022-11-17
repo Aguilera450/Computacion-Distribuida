@@ -1,6 +1,11 @@
 \documentclass[9pt]{beamer}
 
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Code
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % Use roboto Font (recommended)
 \usepackage[sfdefault]{roboto}
 \usepackage[utf8]{inputenc}
@@ -47,33 +52,33 @@
  \tableofcontents
 \end{frame}
 
-\section{Presentation}
+\section{Introducción.}
+\subsection{Tiempo Vectorial.}
+\input{./01Introduccion}
 
-\subsection{introduction}
-
-\input{./Introduccion}
+\subsection{Relojes Vectoriales.}
 
 \def\beamer@mytheme@style{green}
-\input{./Problema01}
+\input{./02Definiciones}
 
-\subsection{fonts}
+\subsection{Algoritmo.}
 \input{./Problema02}
 
-\subsection{footnotes}
 \input{./Problema03}
 
 
-\section{Collections}
+\section{Propiedades.}
 
-\subsection{lists}
+\subsection{Algunos enunciados.}
 \input{./Problema04}
 
-\subsection{tables}
+\subsection{Reducción de costo de comparaciones de dos vectores.}
 \input{./Problema05}
 
-\subsection{blocs}
+\subsection{Relacionando el tiempo vectorial con estados globales.}
 \input{./Problema06}
 \input{./Problema07}
+\subsection{Desventajas.}
 \input{./Problema08}
 \input{./Problema09}
 \input{./Problema10}
@@ -82,14 +87,14 @@
 % to be suppressed. Useful for showing large pictures
 \input{./Problema11}
 
-\section{Next section}
-\subsection{subsection 1}
-\subsection{subsection 2}
-\subsection{subsection 3}
-\section{One more section}
-\subsection{subsection 1}
-\subsection{subsection 2}
-\subsection{subsection 3}
+\section{Aplicaciones.}
+\subsection{Determinando Propiedades Globales.}
+\subsection{Un problema de conjuntos.}
+\section{Relojes de Bloom.}
+\subsection{Introducción.}
+\subsection{Filtro Bloom.}
+\subsection{Relojes de bloom.}
+\subsection{Aplicaciones y comparación con los relojes vectoriales.}
 
 \input{./Problema12}
 \end{document}
