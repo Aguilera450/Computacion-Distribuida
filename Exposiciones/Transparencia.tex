@@ -53,48 +53,44 @@
 \end{frame}
 
 \section{Introducción.}
-\subsection{Tiempo Vectorial.}
 \input{./01Introduccion}
 
-\subsection{Relojes Vectoriales.}
-
-\def\beamer@mytheme@style{green}
+\subsection{Tiempo Vectorial.}
 \input{./02Definiciones}
 
+\subsection{Relojes Vectoriales.}
+\input{./03Definiciones}
+
+\def\beamer@mytheme@style{green}
+
 \subsection{Algoritmo.}
-\input{./Problema02}
+\input{./04Definiciones} % Algoritmo.
+\input{./05Definiciones} % Propagación del tiempo vectorial.
+\input{./06Definiciones} % Propiedades. 
+\input{./07Definiciones} % Reducción de costo en la comparación de dos vectores.
+\input{./08Definiciones} % Relación del tiempo vectorial y estados globales.
 
-\input{./Problema03}
-
-
-\section{Propiedades.}
-
-\subsection{Algunos enunciados.}
-\input{./Problema04}
-
-\subsection{Reducción de costo de comparaciones de dos vectores.}
-\input{./Problema05}
-
-\subsection{Relacionando el tiempo vectorial con estados globales.}
-\input{./Problema06}
-\input{./Problema07}
 \subsection{Desventajas.}
-\input{./Problema08}
-\input{./Problema09}
-\input{./Problema10}
+\input{./09Desventajas}  % Desventajas.
 
 % The [plain] causes the headlines, footlines, and sidebars 
 % to be suppressed. Useful for showing large pictures
-\input{./Problema11}
 
+% TODO. Sin implementar.
 \section{Aplicaciones.}
-\subsection{Determinando Propiedades Globales.}
+\subsection{El caso DynamoDB.}
+\input{./Problema09}
 \subsection{Un problema de conjuntos.}
+\input{./Problema10}
+\subsection{Determinando Propiedades Globales.}
+\input{./Problema11}
+\subsection{Implementación en sistemas dinámicos.}
+\subsection{Detección de una conjunción de predicados locales estables.}
+
 \section{Relojes de Bloom.}
 \subsection{Introducción.}
 \subsection{Filtro Bloom.}
 \subsection{Relojes de bloom.}
 \subsection{Aplicaciones y comparación con los relojes vectoriales.}
-
 \input{./Problema12}
 \end{document}

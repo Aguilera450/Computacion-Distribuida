@@ -1,0 +1,25 @@
+%%%%%%%%%%%%%%%%%%% Especificación:
+\begin{frame}[fragile]{Algoritmo:}{Propiedades.}
+  \justifying
+  \textbf{Def.} Sea $e.Vc$ el vector asociado al evento $e$.\\[0.3cm]
+  
+  \textbf{Teo 1.} Por el algoritmo mencionado tenemos que, para cualesquiera
+  $e_1$ y $e_2$ distintos tenemos que
+  \begin{enumerate}
+  \item[$a$)] $\left(e_1 \rightarrow e_2\right) \Leftrightarrow \left(e_1.Vc < e_2.Vc\right)$;
+  \item[$b$)] $\left(e_1 || e_2\right) \Leftrightarrow \left(e_1.Vc || e_2.Vc\right)$.
+  \end{enumerate}
+  
+  \textbf{Cor 1.} Dadas dos caracterizaciones a eventos (fechas), determinar si estos
+  eventos están relacionados o no, puede requerir hasta $n$ comparaciones de enteros.
+  \\[0.3cm]
+  
+  \textbf{Teo 2.} Sean dos eventos $e_1$ y $e_2$ con tuplas $\langle e_1.Vc, i \rangle$
+  y $\langle e_2.Vc, j\rangle$ de manera respectiva y $i \not= j$. Entonces
+  \begin{enumerate}
+  \item[$a$)] $\left(e_1 \rightarrow e_2\right) \Leftrightarrow
+    \left(e_1.Vc[i] \leq e_2.Vc[i]\right)$;
+  \item[$b$)] $\left(e_1 || e_2\right) \Leftrightarrow
+    \left((e_1.Vc[i] > e_2.Vc[i]) \land (e_2.Vc[j] > e_1.Vc[j])\right)$.
+  \end{enumerate}
+\end{frame}

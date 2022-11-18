@@ -1,0 +1,19 @@
+%%%%%%%%%%%%%%%%%%% Especificación:
+\begin{frame}[fragile]{Definiciones:}{Reloj Vectorial.}
+    \justifying
+    \textbf{Reloj Vectorial.} La implementación del tiempo
+    vectorial requiere que cada proceso, en el sistema,
+    mantenga un vector de enteros positivos $Vc_i[1, \dotsm, n]$
+    con valores inicialmente $[0, \dotsm, 0]$. Este vector
+    debe cumplir con
+    \begin{enumerate}
+    \item $Vc_i[i]$ cuenta el número de eventos producidos por
+      $p_i$.
+    \item $Vc_i[j]$, $j \not= i$, nos dice cuántos eventos conoce
+      $p_i$ producido por $p_j$.
+    \end{enumerate}
+    De manera formal, sea $e$ un evento producido por $p_i$,
+    tenemos que
+    \[Vc_i[k] = \left|\{f | (f \text{ se produjo por } p_k) \land
+    (f \rightarrow e)\}\right| + 1(k, i).\]
+\end{frame}

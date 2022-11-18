@@ -1,0 +1,27 @@
+%%%%%%%%%%%%%%%%%%% Especificación:
+\begin{frame}{Reloj Vectorial:}{Algoritmo.}
+  \justifying
+  \textbf{Una primera aproximación.} Inicialmente
+  todos los procesos disponen de un vector con
+  entradas igual al número total de procesos, este
+  vector debe estar inicializado en $0$ para cada
+  entrada. A continuación se describe el algoritmo:
+  \begin{itemize}
+  \item[$\blacktriangleright$] Si $p_i$ produce un evento, entonces:
+    \begin{enumerate}
+    \item[(1)] $Vc_i[i] \leftarrow Vc_i[i] + 1$;
+    \item[(2)] Produce un evento $e$ caracterizado por $Vc_i[1, \dotsm, n]$.
+    \end{enumerate}
+  \item[$\blacktriangleright$] Cuando $p_i$ envia un mensaje a $p_j$, entonces:
+    \begin{enumerate}
+    \item[(3)] $Vc_i[i] \leftarrow Vc_i[i] + 1$;
+    \item[(4)] \code{send(\textlangle msj, $Vc_i$[1, $\dotsm$, n] \textrangle)} a $p_j$.
+    \end{enumerate}
+  \item[$\blacktriangleright$] Cuando $p_j$ recibe un mensaje, entonces:
+    \begin{enumerate}
+    \item[(3)] $Vc_j[j] \leftarrow Vc_j[j] + 1$;
+    \item[(4)] $Vc_j[1, \dotsm, n] \leftarrow \forall_{k \in [1, \dotsm, n]}
+      \code{max}(Vc_i[k], Vc_j[k])$.
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
