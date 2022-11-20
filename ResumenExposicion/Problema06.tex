@@ -1,0 +1,85 @@
+%%%%%%%%%%% Aquí va la solución al problema 6.
+\newpage
+\textbf{\textcolor{MidnightBlue}{6.}}
+Da un algoritmo distribuido para contar el
+número de procesos en cada capa de un árbol
+enraizado T de forma separada. Al final la
+raíz reportará el número de procesos por capa.
+Analiza la complejidad de tiempo y la complejidad
+de mensajes de tu algoritmo.\\
+
+Necesitariamos de un algoritmo auxilar que nos permite saber que en cada proceso,
+su variable asignará la profundidad con su propia profundidad y regresa la
+profundidad del Árbol.\\
+
+Se propondría que:\\
+El algoritmo se comienza desde la raíz, indicando su propia profundidad y
+avisando a todos sus vecinos. Para el caso en el que, la raíz no cuente con
+vecinos, su profundidad será cero.\\
+
+Cuando un proceso/vértice recibe un entero, se inicializa su variable de profundidad
+conforme al entero que recibio. En el caso de que sea HOJA, entonces termina y
+le notificará a su PADRE con su altura, de lo contrario, avisará a todos sus
+HIJOS su profundidad.\\
+
+Cuando se reciba $<Acabe, n>$, el proceso indicará, si la $n$ es mayor su
+variable $max$, de ocurrir entonces se fijará $max=n$.\\
+
+Si $<Acabe, n>$ es igual al numero de HIJOS, se acabó. De ser el caso de la
+raíz, no sregresará su variable $max$, de lo contrario, le avisará a su PADRE
+que acabó y su profundidad máxima.\\
+
+Nuestro análisis de tiempo y espacio de complejidad:\\
+Su tiempo es la $2\cdot profundidad(T)$, ya que recorre el árbol desde la raíz
+hasta las hojas y viceversa. Y se envió $2|E|$ de mensajes
+
+Como ahora cada proceso/vértice podría conocer su profundidad, podriamos
+regresar la cardinalidad los HIJOS de cada capa/nivel.\\
+
+\begin{algorithm}
+\caption{nivelTree(soyRaiz)}\label{alg:cap}
+\begin{algorithmic}[1]
+\State profundidadArbol = profundidadT(soyRaiz), nivelT = 0, vecinos = 0
+\State $PADRE, HIJOS, profundidad, soyRaiz=soyRaiz, string = ''$
+\State Ejecutar inicialmente\\
+\If{soyRaiz}
+    \State string = '1'
+    \If{$|Hijos| == 0$}
+    return '1'
+    \Else
+        \State string = string++ ';' ++ $|HIJOS|$\\
+        //Todos los procesos del nivel mandarán la $|HIJOS|$, esto hace la linea 10
+        \State $send(<Manda, 1>)$ a todos en HIJOS
+    \EndIf
+\EndIf\\
+\State Al recibir $<Manda, nivel>$ de Padre
+\If{profundidad == capa }
+    \State  $send(< |HIJOS|, nivel>)$ a Padre
+\Else
+    \State  $send(<Manda, nivel>)$ a todos en HIJOS
+\EndIf\\
+\State Al recibir $<HIJOS, nivel>$ de algún proceso en HIJOS
+\State vecinos +=, nivelT += HIJOS
+\If{$vecinos == |HIJOS|$}
+    \If{soyRaiz}
+        \State string = string ++ ';' ++HIJOS
+        \If{nivel == profundidadArbol-1}
+            \State return string
+        \Else
+            \State $send(<Manda, nivel+1>)$ a HIJOS
+        \EndIf
+    \Else
+        \State $send(<nivelT, nivel>)$ a PADRE
+    \EndIf
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+\newpage
+El algoritmo, recorre desde la raíz a sus hojas (niveles) y viceversa, a
+comparación de la mayor profundidad, entonces se tiene que el tiempo toma:
+$profundidad(t)*profundidad(T)$
+
+Los mensaje solo se enviarán al nivel de interés: $n =profundidad(T)-1$,
+y asi también para el recorrido de abajo hacia arriba. Finalmente nos regresará
+un cadena $n_0,n_1,n_2,...,n_i$ donde $n_i$ será el número de vértices por nivel.
