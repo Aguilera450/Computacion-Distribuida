@@ -1,8 +1,4 @@
 \newpage\textbf{\textcolor{MidnightBlue}{1.}}
-En el problema de \code{transaction commit} para bases de datos distribuidas, cada uno
-de los $n$ procesos forma una opinión independiente sobre realizar un \code{commit}
-o abortar una transacción distribuida. Los procesos deben tomar una decisión consistente,
-de modo que si la opinión de un sólo proceso es abortar, entonces, la transacción es
-abortada y si la opinión es realizar el \code{commit}, entonces, la transacción es
-realizada. ¿Se puede solucionar este problema en un sistema asíncrono sujeto a fallas de
-tipo paro? ¿Por qué sí o por qué no?
+En el problema de \code{transaction commit} para bases de datos distribuidas, cada uno de los $n$ procesos forma una opinión independiente sobre realizar un \code{commit} o abortar una transacción distribuida. Los procesos deben tomar una decisión consistente, de modo que si la opinión de un sólo proceso es abortar, entonces, la transacción es abortada y si la opinión es realizar el \code{commit}, entonces, la transacción es realizada. ¿Se puede solucionar este problema en un sistema asíncrono sujeto a fallas de tipo paro? ¿Por qué sí o por qué no?
+
+No, el problema de \code{transaction commit} se puede reducir al problema del consenso el cual es imposible en un sístema asíncrono (FLP85). No podemos resolver \code{transaction commit} dado que no podemos saber si un proceso falló o simplemente sea lento, de manera que no podemos detectar fallas, y no podemos garantizar que todos los procesos conozcan la decisión.
