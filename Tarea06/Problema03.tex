@@ -2,6 +2,25 @@
 \textbf{\textcolor{MidnightBlue}{3.}}
 Considera el algoritmo de relojes vectoriales y demuestra que toda ejecución se cumple
 que $e_1\Rightarrow e_2 \Leftrightarrow VT(e_1)<VT(e_2)$, para cualquier par de eventos
-$e_1,e_2$. Decimos que $VT(e_1)<VT(e_2)$ si y sólo si $VT(e_1) \neq (e_2)$ y
+$e_1,e_2$. Decimos que $VT(e_1) < VT(e_2)$ si y sólo si $VT(e_1) \neq (e_2)$ y
 $VT(e_1)\leq VT(e_2)$, donde $\leq$ denota el orden parcial definido en clase sobre
 vectores $n$-dimensionales con entradas enteras.
+
+$\rhd$ Para esta prueba analicemos $2$ posibles casos:
+\begin{itemize}
+\item[$\Rightarrow$)] Notemos que el tiempo en la $i$-ésima posición
+                      del vector, correspondiente a $p_i$ como estado
+                      local y aumenta a lo largo de su ``vida'', además
+                      cada intercambio de información resulta en la
+                      combinación del vector de llegada con el vector
+                      del proceso recepción, así
+                      \[(e_1\Rightarrow e_2) \Rightarrow VT(e_1) < VT(e_2).\]
+\item[$\Leftarrow$)]  Sabemos que solo el proceso $p_i$ es el causante del
+                      incremento en la $i$-ésima entrada de cualquiera de los
+                      vectores en el sistema. Como $VT(e_1) < VT(e_2)$, en
+                      particular $e_1.Vt[i] < e_2.Vt[i]$, por lo que concluimos
+                      que
+                      \[VT(e_1)<VT(e_2) \Rightarrow e_1\Rightarrow e_2.\]
+\end{itemize}
+De lo anterior se concluye la prueba.
+\hfill $\lhd$
