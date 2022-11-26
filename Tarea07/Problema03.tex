@@ -1,0 +1,16 @@
+\textbf{\textcolor{MidnightBlue}{3.}}
+Supongamos que no tenemos suficientes recursos para equipar todas nuestras máquinas
+con detectores de fallos. En su lugar, ordenamos detectores de fallos eventualmente
+fuertes para $k$ máquinas y las restantes $n-k$ máquinas tienen detectores de fallos
+fake que nunca sospechan de nadie. La elección de cuales máquinas obtienen el
+detector 
+de fallos real y cuales obtienen los falsos, está bajo el control de un adversario.\\
+
+Esto significa que todo proceso fallido es eventualmente puesto bajo sospecha de
+manera permanente por todo procesos no fallido con un detector de fallos real, y hay
+al menos un proceso no fallido que eventualmente no es puesto bajo sospecha de forma
+permanente por nadie. Llamemos al detector de fallas resultante $\Diamond S_k$.\\
+
+Sea $f$ el número actual de fallas. ¿Bajo que condiciones de $f$, $k$ y $n$ se puede
+resolver el consenso en el modelo usual de paso de mensajes asíncrono determinista
+usando $\Diamond S_k$?\\

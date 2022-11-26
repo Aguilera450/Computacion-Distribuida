@@ -1,0 +1,16 @@
+\newpage\textbf{\textcolor{MidnightBlue}{1.}}
+Considere el siguiente mecanismo de elección de líder vagamente monárquico para
+un sistema de paso de mensajes asíncrono con fallas de tipo paro. Cada proceso tiene
+acceso a un oráculo que inicia con el valor $0$ y puede incrementar sobre el tiempo.
+El oráculo garantiza:
+\begin{enumerate}[a)]
+%%%%%%%%%%%%%%%%%       Inciso A        %%%%%%%%%%%%%%%%%
+\item No hay dos procesos que vean el mismo valor distinto de cero.
+%%%%%%%%%%%%%%%%%       Inciso B        %%%%%%%%%%%%%%%%%
+\item Eventualmente algunos procesos no fallidos se les asigna un valor fijo que es
+mayor que los valores de todos los demás procesos por el resto de la ejecución.
+\end{enumerate}
+
+En función del número de procesos $n$, ¿Cuál es el mayor número de fallas de tipo
+paro
+$f$ para el cuál es posible resolver consenso utilizando este oráculo?\\
