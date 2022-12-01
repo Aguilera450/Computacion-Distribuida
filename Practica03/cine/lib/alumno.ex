@@ -10,7 +10,7 @@ defmodule Alumno do
     n=elige_numero()
     cont=cont+1
     #Probabilidad de fallar
-    if Enum.random(1..4) == 3 do
+    if Enum.random(1..10) == 3 do
       IO.puts("El proceso #{inspect(caller)} propone #{inspect(n)}, antes de fallar")
       Process.exit(caller, :kill)
     else
