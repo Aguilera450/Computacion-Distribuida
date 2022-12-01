@@ -11,19 +11,19 @@ El oráculo garantiza:
 mayor que los valores de todos los demás procesos por el resto de la ejecución.
 \end{enumerate}
 
-En función del número de procesos $n$, ¿Cuál es el mayor número 
+En función del número de procesos $n$, ¿Cuál es el mayor número
 de fallas de tipo paro $f$ para el cuál es posible resolver consenso utilizando este oráculo?\\
 
-Recordamos que la razón por la cual no es posible llegar a consenso 
-en un sistema asíncrono con fallas de tipo paro es que los 
-procesos no son capaces de  distinguir si un proceso ha fallado o 
-solo es lento.
+Recordamos que la razón por la cual no es posible llegar a consenso
+en un sistema asíncrono con fallas de tipo paro es que los
+procesos no son capaces de  distinguir si un proceso ha fallado o
+solo es lento.\\
 
-Si el proceso es capaz de preguntarle al oraculo si cierto proceso esta con 
-vida ya que solo los procesos no fallidos tienen asignado un valor fijo 
-diferente y mayor que los valores de todos lo demás procesos por el resto de la 
+Si el proceso es capaz de preguntarle al oraculo si cierto proceso esta con
+vida ya que solo los procesos no fallidos tienen asignado un valor fijo
+diferente y mayor que los valores de todos lo demás procesos por el resto de la
 ejecución, entonces ya es posible resolver el problema de elección de líder,
-sin embargo, solo algunos procesos conoceran este valor a pesar de estar con 
-vida. Entonces a pesar de que gracias al oraculo algunos procesos conozcan un 
+sin embargo, solo algunos procesos conoceran este valor a pesar de estar con
+vida. Entonces a pesar de que gracias al oraculo algunos procesos conozcan un
 valor que cumple con las caracteristicas anteriores no es posible
-solucionar la elección de líder.
+solucionar la elección de líder.\\

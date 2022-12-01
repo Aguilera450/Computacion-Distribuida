@@ -6,3 +6,20 @@ completo $k$-acotado, esto significa que al menos $min(k,f)$ procesos fallidos e
 eventualmente en sospecha de manera permanente por todos los procesos, donde $f$ es
 el número de procesos fallido. ¿Para que valores de $k$, $f$ y $n$ puede este sistema
 resolver acuerdo.\\
+
+A partir de la generalización del consenso en sistemas asíncronos.
+Se entiende que solo basta con tener un número de limitado de $f<k$ de fallas
+De este se tiene lo mismo, y las condiciones de acuerdo y validez se reemplazan
+por las siguientes, donde $"k"$ es cualquier entero, entonces $"k\geq 1"$.\\
+
+De manera que ahora se tendrá como:
+\begin{itemize}
+\item Acuerdo: Para cualquier ejecución, se tendrá un subconjunto $W$ de $V$,
+($V$ es el conjunto de valores de los procesos)
+donde $|W|=k$, de tal modo que los valores de decisión están en $W$.
+\item Validez: Para cualquier ejecución, se tendrá que cualquier valor de decisión
+para cualquier proceso es el valor inicial de algún proceso.
+\end{itemize}
+
+Por lo que es suficiente que $k$ sea mayor a $1$,  $f<k$ y $n>2f$ para resolver
+el acuerdo.\\
