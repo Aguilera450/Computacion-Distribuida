@@ -14,4 +14,17 @@ permanente por nadie. Llamemos al detector de fallas resultante $\Diamond S_k$.\
 
 Sea $f$ el número actual de fallas. ¿Bajo que condiciones de $f$, $k$ y $n$ se puede
 resolver el consenso en el modelo usual de paso de mensajes asíncrono determinista
-usando $\Diamond S_k$?\\
+usando $\Diamond S_k$? \newline
+
+$\rhd$ \textbf{Solución:} Sabemos por definición de consenso con \code{$\Delta$S} que
+$f < \frac{n}{2}$ es un condición necesaria para poder llegar a un consenso de manera
+consistente. Ahora, sabemos que solo podemos equipar $k$ máquinas con nuestros detectores
+de fallos y $n - k$ son máquinas con detectores de fallos \textit{fake}, entonces
+¿qué tan grande es $k$ y $n - k$ para que aún podamos llegar a un consenso?
+
+Supongamos sin pérdida de generalidad que existen $f = \frac{n}{2} - 1$, entonces nuestras
+$k$-máquinas con detectores de fallos deben poder lidiar con estos fallos y el número
+suiciente de estas es $k = n - 1$, dejando así a $n - k = n - (n - 1) ) = 1$. Si el número
+de fallos en nuestra cota disminuye en $m$, entonces $k = (n - 1) - m$ y $n - k = m + 1$.
+
+\hfill $\lhd$
