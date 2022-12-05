@@ -77,5 +77,32 @@
 \begin{document}
 \fancyhead[r]{ Computación Distribuida 2023-1}
 \input{../Portada/Portada}
-\input{./relojesVectoriales}
+
+\newpage
+
+\section{Definiciones}
+
+Los \textbf{relojes vectoriales} son un tipo de
+reloj lógico propuesto de manera independiente por
+\textit{Colin J. Fidge} y \textit{Friedemann Mattern}
+en 1988. 
+Esta técnica consiste en un mapeo entre eventos en una
+historia distribuida y vectores enteros.
+De manera que nos permite determinar si eventos esta casualmente 
+relacionados o no (si son concurrrentes). 
+Un \textbf{sistema vectorial de relojes}. Es un mecanismo capaz 
+de caracterizar estados locales (en adelante, eventos) en un sistema
+distribuido, asociando un valor vectorial a cada estado.
+El \textbf{tiempo vectorial} es la noción de tiempo capturada
+por los relojes vectoriales.
+
+\textbf{Caracterización Formal del Tiempo Vectorial.} Sea
+\code{date(e)} la caracterización asociada a un evento \code{e},
+de tal manera que se cumple:
+\begin{enumerate}
+\item $\forall_{e_1, e_2}:\left(e_1 \rightarrow e_2\right)
+  \Leftrightarrow \code{date($e_1$)} < \code{date($e_2$)}$.
+\item $\forall_{e_1, e_2}: \left(e_1\ ||\ e_2\right) \Leftrightarrow
+  \code{date($e_1$)}\ ||\ \code{date($e_2$)}$.
+\end{enumerate}
 \end{document}
