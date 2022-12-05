@@ -1,16 +1,17 @@
 %%%%%%%%%%%%%%%%%%% Especificación:
 \begin{frame}[fragile]{Aplicación:}{Relojes vectoriales dinamicos}
     \justifying
+
+    Inicialmente, el reloj consiste de una sola fila con $C_i(e_i^0)[1,1]=i$ y $C_i(e_i^0)[1,2]=0$
+
     \textbf{Las reglas para actualizar son las siguientes:} 
     
     \begin{enumerate}
-        \item $\forall_{e_1, e_2}:\left(e_1 \rightarrow e_2\right)
-        \Leftrightarrow \code{date($e_1$)} < \code{date($e_2$)}$.
-        \item $\forall_{e_1, e_2}: \left(e_1\ ||\ e_2\right) \Leftrightarrow
-        \code{date($e_1$)}\ ||\ \code{date($e_2$)}$.
-        \item Al recibir $e_i^x$, entonces $\forall$
-        \item d
-        \item d
+        \item Al recibir $e_i^x$, entonces $\forall l$ que no exceda el número de filas en $C_j(e_j^y)$: $C_j(e_j^y) = max\{C_i(e_i^{x-1})[k,2], C_j(e_j^y)[1,2]\}$, donde $C_j(e_j^y)$ la matriz de reloj del evento enviado en el proceso $J$ que envio $m$ al proceso $i$, y $C_j(e_j^y)[l,1]=C_i(e_i^x)[k,1]$
+        
+        \item Si no existe $k$ tal que $C_i(e_i^x)[k,1] = C_j(e_j^y)[l,1]$ para cualquier l, entonces una nueva fila es añadida a $C_i(e_i^x)$ con $C_i(e_i^x)[k,1] = C_j(e_j^y)[l,1]$ y $C_i(e_i^x)[k,2] = C_j(e_j^y)[l,2]$
+        
+        \item Si $e_i^x$ es cualquier evento, entonces el proceso incrementa su reloj vectorial: $C_i(e_i^x)[1,2] = C_i(e_i^{x-1})[1,2]+1$
 
   \end{enumerate}
 \end{frame}
