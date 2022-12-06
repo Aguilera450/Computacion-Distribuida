@@ -1,0 +1,20 @@
+\begin{frame}[fragile]{Aplicación:}{DynamoDB}
+    \justifying
+
+    {\bf Ejemplo:}\\[0.3cm]
+
+    Ahora supongamos que algún cliente lee tanto D3 como D4 (el contexto nos dirá
+    que la lectura encontró ambos valores)\\[0.3cm]
+
+    {\bf Nota:} El contexto de la lectura es un resumen de los relojes de D3 y D4, a
+    saber, [(Sx, 2), (Sy, 1), (Sz, 1)]. Entonces
+
+\begin{itemize}
+\item Si el cliente realiza la reconciliación y el nodo Sx coordina la escritura,
+Sx actualizará su número de secuencia en el reloj.
+
+\item Finalmente el nuevo dato D5 tendrá el siguiente reloj:
+[(Sx, 3), (Sy, 1), (Sz, 1)].
+\end{itemize}
+
+\end{frame}

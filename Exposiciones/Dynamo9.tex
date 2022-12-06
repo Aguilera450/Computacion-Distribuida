@@ -1,0 +1,20 @@
+\begin{frame}[fragile]{Aplicación:}{DynamoDB}
+    \justifying
+
+{\bf Posible desvantaja de esto es:}
+
+Es que el tamaño de los relojes vectoriales puede crecer si muchos servidores
+coordinan las escrituras en un objeto.\\[0.3cm]
+
+{\bf Lo provoca:}\\[0.3cm]
+En caso de particiones de red o fallas de múltiples
+servidores, las solicitudes de escritura pueden ser manejadas por nodos que no
+están en los primeros N nodos en la lista de preferencias\\[0.3cm]
+
+{\bf Para evitar lo anterior:}\\[0.3cm]
+Se emplea el siguiente esquema de truncamiento de reloj:
+Junto con cada par (nodo, contador), Dynamo almacena una marca de tiempo que
+indica la última vez que el nodo actualizó el elemento de datos. Cuando el
+número de pares en el reloj vectorial alcanza un umbral, el par más antiguo se
+elimina del reloj.
+\end{frame}

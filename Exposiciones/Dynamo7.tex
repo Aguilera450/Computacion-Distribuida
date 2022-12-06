@@ -1,0 +1,22 @@
+\begin{frame}[fragile]{Aplicación:}{DynamoDB}
+    \justifying
+
+    {\bf Ejemplo:}\\[0.3cm]
+
+    Ahora supongamos que un cliente diferente lee D2 y luego intenta actualizarlo,
+    y otro nodo realiza la escritura (por ejemplo, Sz).
+
+\begin{itemize}
+\item El sistema va a tener a D4 (descendiente de D2) cuya versión de reloj es
+[(Sx, 2), (Sz, 1)].
+
+\item Un nodo que es consciente de D3 y recibe D4 encontrará que no existe una
+relación causal entre ellos. Esto quiere decir que hay cambios en D3 y D4 que
+no se reflejan entre sí.
+
+\item Ambas versiones de los datos deben conservarse y presentarse a un cliente
+(después de una lectura) para la reconciliación semántica.
+
+\end{itemize}
+
+\end{frame}

@@ -1,0 +1,27 @@
+\begin{frame}[fragile]{Aplicación:}{DynamoDB}
+    \justifying
+
+    {\bf Ejemplo:}\\[0.3cm]
+
+\begin{itemize}
+
+\item Se tiene un nodo Sx, que maneja la escritura de esta clave aumenta su número
+de secuencia y lo usa para crear el reloj vectorial de los datos.
+
+\item Se tiene un objeto D1 y su reloj asociado [(Sx, 1)]. Este cliente lo actualiza
+Supongamos que el mismo nodo también maneja esta solicitud.
+
+\item Ahora el sistema tendra un objeto D2 y su reloj asociado [(Sx, 2)].
+
+\item D2 desciende de D1, y por lo tanto sobrescribe D1
+
+\item Supongamos que el mismo cliente actualiza el objeto nuevamente y un
+servidor diferente maneja la solicitud (por ejemplo Sy).
+
+\item Se tiene datos D3 y su reloj asociado [(Sx, 2), (Sy, 1)].
+
+
+\end{itemize}
+
+
+\end{frame}

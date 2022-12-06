@@ -1,0 +1,17 @@
+\begin{frame}[fragile]{Aplicación:}{DynamoDB}
+    \justifying
+
+    {\bf Para que los utiliza:}\\[0.3cm]
+
+    Para capturar la causalidad entre diferentes versiones del mismo objeto.\\[0.3cm]
+
+    Un reloj vectorial está asociado con cada versión de cada objeto. Uno puede
+    determinar si dos versiones de un objeto están en ramas paralelas o tienen un
+    orden causal, examinando sus relojes vectoriales.\\[0.3cm]
+
+    Si los contadores del reloj del primer objeto son menores o iguales que todos
+    los nodos del segundo reloj, entonces el primero es un ancestro del segundo y
+    puede olvidarse. De lo contrario, se considera que los dos cambios están en
+    conflicto y requieren reconciliación.
+
+\end{frame}

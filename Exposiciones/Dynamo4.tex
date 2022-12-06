@@ -1,0 +1,16 @@
+\begin{frame}[fragile]{Aplicación:}{DynamoDB}
+    \justifying
+
+    {\bf Como lo hace:}\\[0.3cm]
+
+    Cuando un cliente desea actualizar un objeto, debe especificar qué versión está
+    actualizando. Esto se hace pasando el contexto que obtuvo de una operación de
+    lectura anterior, que contiene la información del reloj vectorial.\\[0.3cm]
+
+    Al procesar una solicitud de lectura, si Dynamo tiene acceso a varias ramas que
+    no se pueden reconciliar sintácticamente, devolverá todos los objetos en las
+    hojas, con la información de versión correspondiente en el contexto. Se considera
+    que una actualización que usa este contexto ha reconciliado las versiones
+    divergentes y las ramas se contraen en una sola versión nueva.
+
+\end{frame}
