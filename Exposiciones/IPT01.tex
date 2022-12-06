@@ -1,5 +1,19 @@
 %%%%%%%%%%%%%%%%%%% Especificación:
-\begin{frame}[fragile]{Aplicación:}{Relojes vectoriales dinamicos}
+\begin{frame}[fragile]{Vector Clocks in Action:}{Immediate Precessors}
     \justifying
-    En proceso  
+    \textbf{Evento relevante} En algún nivel de abstracción, sólo un subconjunto de los eventos son relevantes. Por ejemplo, en algunas aplicaciones sólo la modificación de algunas variables locales, o el procesamiento de ciertos mensajes especificos son relevantes.
+    
+    Dado un computo distribuido
+    $\widehat{H}=(H,\xrightarrow[]{ev})$, sea $R\subset H$ los eventos relevantes.
+
+    \textbf{Definición. Relación causal de Precedencia}, denotada como $\xrightarrow[]{re}$:
+    $$\forall e_1,e_2 \in R : (e_1 \xrightarrow[]{re} e_2) \iff (e_2 \xrightarrow[]{ev} e_1)$$
+
+    Esta relación es la proyección de $\xrightarrow[]{ev}$ sobre los elementos de R.
+    
+    %Sin perder generalidad, consideramos que $R$ consiste solo de eventos internos. Los eventos de comunicación son eventos de bajo nivel que, sin ser relevantes en sí mismos, participan en el establecimiento de una precedencia causal sobre eventos relevantes. Si un evento de comunicación necesita ser observado como relevante explícitamente, un evento interno asociado puede ser creado antes o despues de este. 
+
+    Sean $e_1,e_2 \in R$. Si $e_1$ es \textbf{predecesor inmediato de} $e_2$ entonces:
+    $$(e_1 \xrightarrow[]{re} e_2) \wedge (\nexists e \in : (e_1 \xrightarrow[]{re} e) \wedge (e \xrightarrow[]{re}e_2))$$
+
 \end{frame}
