@@ -7,7 +7,7 @@
     \textbf{Las reglas para actualizar son las siguientes:} 
     
     \begin{enumerate}
-        \item Al recibir $e_i^x$, entonces $\forall l$ que no exceda el número de filas en $C_j(e_j^y)$: $C_j(e_j^y) = max\{C_i(e_i^{x-1})[k,2], C_j(e_j^y)[1,2]\}$, donde $C_j(e_j^y)$ la matriz de reloj del evento enviado en el proceso $J$ que envio $m$ al proceso $i$, y $C_j(e_j^y)[l,1]=C_i(e_i^x)[k,1]$
+        \item Al recibir el $m$ de $e_i^x$, entonces $\forall l$ que no exceda el número de filas en $C_j(e_j^y)$: $C_j(e_j^y) = max\{C_i(e_i^{x-1})[k,2], C_j(e_j^y)[1,2]\}$, donde $C_j(e_j^y)$ la matriz de reloj del evento enviado en el proceso $J$ que envio $m$ al proceso $i$, y $C_j(e_j^y)[l,1]=C_i(e_i^x)[k,1]$
         
         \item Si no existe $k$ tal que $C_i(e_i^x)[k,1] = C_j(e_j^y)[l,1]$ para cualquier l, entonces una nueva fila es añadida a $C_i(e_i^x)$ con $C_i(e_i^x)[k,1] = C_j(e_j^y)[l,1]$ y $C_i(e_i^x)[k,2] = C_j(e_j^y)[l,2]$
         
