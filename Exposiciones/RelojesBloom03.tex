@@ -1,0 +1,27 @@
+%%%%%%%%%%%%%%%% Relojes Bloom.
+\begin{frame}[fragile]{Relojes Bloom:}{Filtro Bloom. Mejoras.}
+  \justifying
+  ¿Qué podemos hacer? ...\newline
+  Podemos controlar la tasa de falsos positivos ajustando:
+  \begin{enumerate}
+  \item El tamaño del \textit{bloom-filtro} ($m$).
+  \item El número de elementos insertados en el filtro ($n$).
+  \item El número de \textit{hash-funciones} ($k$) utilizadas en la codificación.
+  \end{enumerate}
+  y por medio de la ecuación:
+  \[\left(1 - \left(1 - \frac{1}{m}\right)^{kn}\right)^k\]
+  \textbf{Idea Intuitiva:}
+  \begin{itemize}
+  \item $1 - \frac{1}{m}$ es la probabilidad de tener un \code{bit} en
+    el filtro que no este establecido como $1$ por alguna determinada
+    función.
+  \item $\left(1 - \frac{1}{m}\right)^k$ es la probabilidad de que un bit
+    en particular no se establezca en uno, dado que $k$ hashes pueden
+    señalarlo potencialmente.
+  \item $\left(1 - \frac{1}{m}\right)^{kn}$ es la probabilidad de que un
+    bit en particular siga siendo cero después de $n$ elementos.
+  \item $\left(1 - \left(1 - \frac{1}{m}\right)^{kn}\right)^k$ es la probabilidad
+    de que $k$ índices sean $1$ después de insertar n elementos, también
+    conocido como tasa de falsos positivos.
+  \end{itemize}
+\end{frame}
