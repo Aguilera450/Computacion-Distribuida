@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%% Especificación:
+\begin{frame}[fragile]{Aplicación:}{Relojes vectoriales dinamicos}
+    \justifying
+    
+    De manera similar podemos hacer una prueba de dependencia causal de la forma:
+    $e_i^x \implies e_j^y)$ si y solo si $\exists k,l$:
+    $$C_i(e_i^x)[k,1] = C_j(e_j^y)[l,1] = i$$
+    y 
+    $$C_i(e_i^x)[k,2] \leq C_j(e_j^y)[l,2]$$
+
+    Y de concurrencia
+    $e_i^x || e_j^y$ si y solo si
+    $$C_j(e_j^y) \nleq C_i(e_i^x)$$
+    y
+    $$C_i(e_i^x) \nleq C_j(e_j^y)$$
+\end{frame}
